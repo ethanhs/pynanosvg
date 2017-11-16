@@ -1,0 +1,19 @@
+from typing import Optional
+
+class SVG:
+    @property
+    def width(self) -> int: ...
+
+    @property
+    def height(self) -> int: ...
+
+class Parser:
+    @staticmethod
+    def parse(svg: str, dpi: str = ...) -> SVG: ...
+
+    @staticmethod
+    def parse_file(filename: str, dpi: str = ...) -> SVG: ...
+
+class Rasterizer:
+    def rasterize(self, svg: SVG, width: int, height: int, scale: float = ..., tx: int = ..., ty: int = ...) -> bytes: ...
+    def rasterize_to_buffer(self, svg: SVG, width: int, height: int, scale: float = ..., tx: int = ..., ty: int = ..., stride: int = ..., buffer: Optional[bytes] = ...) -> bytes: ...
