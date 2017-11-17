@@ -1,0 +1,14 @@
+sudo: false
+language: python
+cache: pip
+python:
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7-dev"
+
+install:
+  - pip install -r test-requirements.txt
+  - pip install .
+script:
+  - pytest

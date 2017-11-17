@@ -17,7 +17,7 @@ cdef class Rasterizer:
         if self._nsvgrasterizer != NULL:
             nsvgDeleteRasterizer(self._nsvgrasterizer)
 
-    def rasterize(self, svg: SVG, width: int, height: int, scale=1.0, tx=0, ty=0):
+    def rasterize(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0) -> bytes:
         """
         Rasterizes the SVG into a new buffer of bytes forming an RGBA image.
         """
@@ -32,9 +32,9 @@ cdef class Rasterizer:
                       buff, width, height, stride)
         return buff
 
-    def rasterize_to_buffer(self, svg: SVG, width, height, scale=1.0, tx=0, ty=0, stride=0, buffer=None):
+    def rasterize_to_buffer(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0, stride: int = 0, buffer = None):
         """
-        Rasterizes the SVG into a given buffer, which should be of length . Stride is usually w * 4.
+        Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually w * 4.
         """
         if not isinstance(buffer, bytes):
             raise TypeError("`buffer` must be bytes, found {}".format(type(buffer)))

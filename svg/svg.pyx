@@ -10,15 +10,15 @@ cdef class SVG:
             nsvgDelete(self._nsvgimage)
 
     @property
-    def width(self):
+    def width(self) -> int:
         """Returns the width of the svg image."""
         if self._nsvgimage == NULL:
             raise ValueError("SVG has not been parsed yet.")
-        return self._nsvgimage.width
+        return int(self._nsvgimage.width)
 
     @property
-    def height(self):
+    def height(self) -> int:
         """Returns the height of the svg image."""
         if self._nsvgimage == NULL:
             raise ValueError("SVG has not been parsed yet.")
-        return self._nsvgimage.height
+        return int(self._nsvgimage.height)
