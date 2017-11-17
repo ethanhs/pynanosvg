@@ -1,1 +1,2 @@
 setuptools
+Cython>=0.27
