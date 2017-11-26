@@ -28,5 +28,6 @@ environment:
       PYTHON_ARCH: "64"
 
 install:
+    - "git submodule update --init"
     - "%PYTHON%\\python.exe -m pip install -r test-requirements.txt"
     - "%PYTHON%\\python.exe setup.py install"

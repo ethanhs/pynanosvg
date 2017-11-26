@@ -1,5 +1,6 @@
 # pynanosvg
-[![Travis](https://img.shields.io/ethanhs/pynanosvg.svg?style=flat-square)](https://travis-ci.org/ethanhs/pynanosvg)
+[![Travis](https://img.shields.io/travis/ethanhs/pynanosvg.svg?style=flat-square)](https://travis-ci.org/ethanhs/pynanosvg) | [![AppVeyor](https://img.shields.io/appveyor/ci/ethanhs/pynanosvg-9m0yu.svg?style=flat-square)](https://ci.appveyor.com/project/ethanhs/pynanosvg-9m0yu)
+
 Pynanosvg is a wrapper around [nanosvg](https://github.com/memononen/nanosvg)
 a simple svg parsing library. I created pynanosvg because the only other
 options in Python were the librsvg bindings, which are very large!
