@@ -21,14 +21,20 @@ cdef class Parser:
     """
 
     @staticmethod
-    def parse(svg: str, dpi: str = '96px') -> SVG:
+    def parse(svg, dpi: str = '96px') -> SVG:
         """
         Creates an SVG image from an SVG string. Units for dpi are 'px', 'pt',
         'pc' 'mm', 'cm', or 'in'.
         """
         units, magnitude = _dpi_conv(dpi)
         im = SVG()
-        im._nsvgimage = nsvgParse(svg.encode('UTF-8'), units, magnitude)
+        if isinstance(svg, str):
+            s = svg.encode('UTF-8')
+        elif isinstance(svg, bytes):
+            s = svg
+        else:
+            raise TypeError("svg must be either str or bytes, found {}".format(type(svg)))
+        im._nsvgimage = nsvgParse(s, units, magnitude)
         if im._nsvgimage == NULL:
             raise SVGParserError("Could not parse SVG from string.")
         else:
