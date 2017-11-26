@@ -1,5 +1,5 @@
 from nanosvg cimport (NSVGimage, nsvgParse, nsvgParseFromFile)
-
+import sys
 
 class SVGParserError(Exception):
     pass
@@ -40,7 +40,7 @@ cdef class Parser:
         Creates an SVG image from filename. Units for dpi are 'px', 'pt',
         'pc' 'mm', 'cm', or 'in'.
         """
-        file = filename.encode('UTF-8')
+        file = filename.encode(sys.getfilesystemencoding())
         units, magnitude = _dpi_conv(dpi)
         im = SVG()
         im._nsvgimage = nsvgParseFromFile(file, units, magnitude)
