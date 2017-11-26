@@ -2,7 +2,7 @@ from svg import Parser, SVG
 
 
 def test_parse_file():
-    svg = Parser.parse_file('tests\Londonhackspacelogo.svg')
+    svg = Parser.parse_file('tests/Londonhackspacelogo.svg')
     assert isinstance(svg, SVG)
 
 
