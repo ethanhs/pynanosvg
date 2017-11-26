@@ -1,6 +1,12 @@
 from setuptools import setup, Extension
 from Cython.Build import cythonize
+import os
+import sys
 
+
+if sys.version_info < (3, 5) and os.name == 'nt':
+    print("Nanosvg cannot be built on Python 3.4 or below on Windows.")
+    sys.exit(1)
 
 ext = [Extension('svg', sources=['svg/__init__.pyx'],
                  include_dirs=['nanosvg/src/', 'pynanosvg/'])]
