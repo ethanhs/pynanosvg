@@ -46,7 +46,7 @@ cdef class Parser:
         im._nsvgimage = nsvgParseFromFile(file, units, magnitude)
         if im._nsvgimage == NULL:
             raise SVGParserError(
-                "Could not parse SVG from {}".format(filename)
+                "Could not parse SVG from {}".format(file)
                 )
         else:
             return im
