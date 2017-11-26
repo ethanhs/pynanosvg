@@ -1,6 +1,6 @@
 from nanosvg cimport (nsvgCreateRasterizer, nsvgRasterize,
                       nsvgDeleteRasterizer, NSVGrasterizer)
-
+import cython
 
 class SVGRasterizerError(Exception):
     pass
@@ -17,7 +17,12 @@ cdef class Rasterizer:
         if self._nsvgrasterizer != NULL:
             nsvgDeleteRasterizer(self._nsvgrasterizer)
 
-    def rasterize(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0) -> bytes:
+    def rasterize(self, svg: SVG,
+                  width: cython.int,
+                  height: cython.int,
+                  scale: cython.float = 1.0,
+                  tx: cython.int = 0,
+                  ty: cython.int = 0) -> bytes:
         """
         Rasterizes the SVG into a new buffer of bytes forming an RGBA image.
         """
@@ -32,7 +37,14 @@ cdef class Rasterizer:
                       buff, width, height, stride)
         return buff
 
-    def rasterize_to_buffer(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0, stride: int = 0, buffer = None):
+    def rasterize_to_buffer(self, svg: SVG,
+                            width: cython.int,
+                            height: cython.int,
+                            scale: cython.float = 1.0,
+                            tx: cython.int = 0,
+                            ty: cython.int = 0,
+                            stride: cython.int = 0,
+                            buffer: bytes = None):
         """
         Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually w * 4.
         """
