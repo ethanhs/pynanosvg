@@ -1,4 +1,3 @@
-from typing import Optional
 
 class SVG:
     @property
@@ -16,4 +15,4 @@ class Parser:
 
 class Rasterizer:
     def rasterize(self, svg: SVG, width: int, height: int, scale: float = ..., tx: int = ..., ty: int = ...) -> bytes: ...
-    def rasterize_to_buffer(self, svg: SVG, width: int, height: int, scale: float = ..., tx: int = ..., ty: int = ..., stride: int = ..., buffer: Optional[bytes] = ...) -> bytes: ...
+    def rasterize_to_buffer(self, svg: SVG, width: int, height: int, stride: int, buffer: bytes, scale: float = ..., tx: int = ..., ty: int = ...) -> bytes: ...

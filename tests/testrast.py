@@ -9,3 +9,14 @@ def test_rast_to_bytes():
     assert isinstance(buff, bytes)
     img = Image.open('tests/Londonhackspacelogo.png')
     assert buff == img.tobytes()
+
+def test_rast_with_buffer():
+    svg = Parser.parse_file('tests/Londonhackspacelogo.svg')
+    r = Rasterizer()
+    stride = svg.width * 4
+    buff = bytes(stride * svg.height)
+    assert isinstance(buff, bytes)
+    r.rasterize_to_buffer(svg, svg.width, svg.height, stride, buff)
+    assert isinstance(buff, bytes)
+    img = Image.open('tests/Londonhackspacelogo.png')
+    assert buff == img.tobytes()

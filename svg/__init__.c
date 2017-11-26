@@ -748,10 +748,10 @@ static const char *__pyx_filename;
 
 
 static const char *__pyx_f[] = {
-  "svg\\parser.pyx",
-  "svg\\svg.pyx",
+  "svg\\parser.pyi",
+  "svg\\svg.pyi",
   "stringsource",
-  "svg\\rasterizer.pyx",
+  "svg\\rasterizer.pyi",
   "svg\\__init__.pyx",
 };
 
@@ -760,7 +760,7 @@ struct __pyx_obj_3svg_8__init___SVG;
 struct __pyx_obj_3svg_8__init___Parser;
 struct __pyx_obj_3svg_8__init___Rasterizer;
 
-/* "svg/svg.pyx":1
+/* "svg/svg.pyi":1
  * cdef class SVG:             # <<<<<<<<<<<<<<
  *     """Cython for parsing and getting information about an SVG"""
  *     cdef NSVGimage* _nsvgimage
@@ -771,7 +771,7 @@ struct __pyx_obj_3svg_8__init___SVG {
 };
 
 
-/* "svg/parser.pyx":14
+/* "svg/parser.pyi":18
  * 
  * 
  * cdef class Parser:             # <<<<<<<<<<<<<<
@@ -783,7 +783,7 @@ struct __pyx_obj_3svg_8__init___Parser {
 };
 
 
-/* "svg/rasterizer.pyx":9
+/* "svg/rasterizer.pyi":9
  * 
  * 
  * cdef class Rasterizer:             # <<<<<<<<<<<<<<
@@ -945,6 +945,33 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_FromDouble(double value);
         __Pyx__ArgTypeTest(obj, type, name, exact))
 static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *name, int exact);
 
+/* GetModuleGlobalName.proto */
+static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
+
+/* PySequenceContains.proto */
+static CYTHON_INLINE int __Pyx_PySequence_ContainsTF(PyObject* item, PyObject* seq, int eq) {
+    int result = PySequence_Contains(seq, item);
+    return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
+}
+
+/* PyFunctionFastCall.proto */
+#if CYTHON_FAST_PYCALL
+#define __Pyx_PyFunction_FastCall(func, args, nargs)\
+    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
+#if 1 || PY_VERSION_HEX < 0x030600B1
+static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, int nargs, PyObject *kwargs);
+#else
+#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
+#endif
+#endif
+
+/* PyCFunctionFastCall.proto */
+#if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
+#else
+#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
+#endif
+
 /* pyobject_as_double.proto */
 static double __Pyx__PyObject_AsDouble(PyObject* obj);
 #if CYTHON_COMPILING_IN_PYPY
@@ -966,27 +993,6 @@ static int __Pyx_ParseOptionalKeywords(PyObject *kwds, PyObject **argnames[],\
     PyObject *kwds2, PyObject *values[], Py_ssize_t num_pos_args,\
     const char* function_name);
 
-/* GetModuleGlobalName.proto */
-static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name);
-
-/* PyCFunctionFastCall.proto */
-#if CYTHON_FAST_PYCCALL
-static CYTHON_INLINE PyObject *__Pyx_PyCFunction_FastCall(PyObject *func, PyObject **args, Py_ssize_t nargs);
-#else
-#define __Pyx_PyCFunction_FastCall(func, args, nargs)  (assert(0), NULL)
-#endif
-
-/* PyFunctionFastCall.proto */
-#if CYTHON_FAST_PYCALL
-#define __Pyx_PyFunction_FastCall(func, args, nargs)\
-    __Pyx_PyFunction_FastCallDict((func), (args), (nargs), NULL)
-#if 1 || PY_VERSION_HEX < 0x030600B1
-static PyObject *__Pyx_PyFunction_FastCallDict(PyObject *func, PyObject **args, int nargs, PyObject *kwargs);
-#else
-#define __Pyx_PyFunction_FastCallDict(func, args, nargs, kwargs) _PyFunction_FastCallDict(func, args, nargs, kwargs)
-#endif
-#endif
-
 /* PyObjectCallMethO.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg);
@@ -1007,6 +1013,13 @@ static CYTHON_INLINE int __Pyx_IterFinish(void);
 /* UnpackItemEndCheck.proto */
 static int __Pyx_IternextUnpackEndCheck(PyObject *retval, Py_ssize_t expected);
 
+/* PyObjectCallNoArg.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
+#else
+#define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
+#endif
+
 /* PyErrExceptionMatches.proto */
 #if CYTHON_FAST_THREAD_STATE
 #define __Pyx_PyErr_ExceptionMatches(err) __Pyx_PyErr_ExceptionMatchesInState(__pyx_tstate, err)
@@ -1020,14 +1033,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *, PyObject *);
 
 /* GetAttr3.proto */
 static CYTHON_INLINE PyObject *__Pyx_GetAttr3(PyObject *, PyObject *, PyObject *);
-
-/* PyIntBinop.proto */
-#if !CYTHON_COMPILING_IN_PYPY
-static PyObject* __Pyx_PyInt_EqObjC(PyObject *op1, PyObject *op2, long intval, int inplace);
-#else
-#define __Pyx_PyInt_EqObjC(op1, op2, intval, inplace)\
-    PyObject_RichCompare(op1, op2, Py_EQ)
-    #endif
 
 /* Import.proto */
 static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level);
@@ -1112,10 +1117,10 @@ static void __Pyx_AddTraceback(const char *funcname, int c_line,
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* CIntFromPy.proto */
-static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
+static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
 /* CIntFromPy.proto */
-static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
+static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
 
 /* FastTypeChecks.proto */
 #if CYTHON_COMPILING_IN_CPYTHON
@@ -1138,6 +1143,8 @@ static int __Pyx_InitStrings(__Pyx_StringTabEntry *t);
 
 /* Module declarations from 'svg.nanosvg' */
 
+/* Module declarations from 'cython' */
+
 /* Module declarations from 'svg.__init__' */
 static PyTypeObject *__pyx_ptype_3svg_8__init___SVG = 0;
 static PyTypeObject *__pyx_ptype_3svg_8__init___Parser = 0;
@@ -1151,13 +1158,20 @@ int __pyx_module_is_main_svg____init__ = 0;
 static PyObject *__pyx_builtin_staticmethod;
 static PyObject *__pyx_builtin_ValueError;
 static PyObject *__pyx_builtin_TypeError;
+static const char __pyx_k_cm[] = "cm";
 static const char __pyx_k_im[] = "im";
+static const char __pyx_k_in[] = "in";
+static const char __pyx_k_mm[] = "mm";
+static const char __pyx_k_pc[] = "pc";
+static const char __pyx_k_pt[] = "pt";
+static const char __pyx_k_px[] = "px";
 static const char __pyx_k_tx[] = "tx";
 static const char __pyx_k_ty[] = "ty";
 static const char __pyx_k_doc[] = "__doc__";
 static const char __pyx_k_dpi[] = "dpi";
 static const char __pyx_k_new[] = "__new__";
 static const char __pyx_k_svg[] = "svg";
+static const char __pyx_k_sys[] = "sys";
 static const char __pyx_k_96px[] = "96px";
 static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_file[] = "file";
@@ -1202,19 +1216,22 @@ static const char __pyx_k_staticmethod[] = "staticmethod";
 static const char __pyx_k_stringsource[] = "stringsource";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_SVGParserError[] = "SVGParserError";
-static const char __pyx_k_svg_parser_pyx[] = "svg\\parser.pyx";
+static const char __pyx_k_svg_parser_pyi[] = "svg\\parser.pyi";
+static const char __pyx_k_VALID_DPI_UNITS[] = "VALID_DPI_UNITS";
 static const char __pyx_k_pyx_PickleError[] = "__pyx_PickleError";
 static const char __pyx_k_setstate_cython[] = "__setstate_cython__";
 static const char __pyx_k_SVGRasterizerError[] = "SVGRasterizerError";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_pyx_unpickle_Parser[] = "__pyx_unpickle_Parser";
+static const char __pyx_k_getfilesystemencoding[] = "getfilesystemencoding";
 static const char __pyx_k_Could_not_parse_SVG_from[] = "Could not parse SVG from {}";
 static const char __pyx_k_buffer_must_be_bytes_found[] = "`buffer` must be bytes, found {}";
+static const char __pyx_k_dpi_needs_to_be_one_of_got[] = "dpi needs to be one of {}, got {}";
 static const char __pyx_k_SVG_has_not_been_parsed_yet[] = "SVG has not been parsed yet.";
 static const char __pyx_k_Could_not_parse_SVG_from_string[] = "Could not parse SVG from string.";
 static const char __pyx_k_The_given_SVG_is_empty_you_must[] = "The given SVG is empty, you must parse the SVG first.";
 static const char __pyx_k_Incompatible_checksums_s_vs_0xd4[] = "Incompatible checksums (%s vs 0xd41d8cd = ())";
-static const char __pyx_k_You_must_set_a_stride_to_rasteri[] = "You must set a stride to rasterize to a buffer, stride is 0";
+static const char __pyx_k_You_must_set_a_stride_to_rasteri[] = "You must set a stride to rasterize to a buffer, stride must be positive.";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 static PyObject *__pyx_kp_s_96px;
 static PyObject *__pyx_kp_s_Could_not_parse_SVG_from;
@@ -1227,35 +1244,44 @@ static PyObject *__pyx_kp_s_SVG_has_not_been_parsed_yet;
 static PyObject *__pyx_kp_s_The_given_SVG_is_empty_you_must;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_UTF_8;
+static PyObject *__pyx_n_s_VALID_DPI_UNITS;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_kp_s_You_must_set_a_stride_to_rasteri;
 static PyObject *__pyx_n_s_buffer;
 static PyObject *__pyx_kp_s_buffer_must_be_bytes_found;
 static PyObject *__pyx_n_s_cline_in_traceback;
+static PyObject *__pyx_n_s_cm;
 static PyObject *__pyx_n_s_dict;
 static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_s_dpi;
 static PyObject *__pyx_n_s_dpi_2;
 static PyObject *__pyx_n_s_dpi_conv;
+static PyObject *__pyx_kp_s_dpi_needs_to_be_one_of_got;
 static PyObject *__pyx_n_s_encode;
 static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_filename;
 static PyObject *__pyx_n_s_format;
+static PyObject *__pyx_n_s_getfilesystemencoding;
 static PyObject *__pyx_n_s_getstate;
 static PyObject *__pyx_n_s_height;
 static PyObject *__pyx_n_s_im;
 static PyObject *__pyx_n_s_import;
+static PyObject *__pyx_n_s_in;
 static PyObject *__pyx_n_s_magnitude;
 static PyObject *__pyx_n_s_main;
 static PyObject *__pyx_n_s_metaclass;
+static PyObject *__pyx_n_s_mm;
 static PyObject *__pyx_n_s_module;
 static PyObject *__pyx_n_s_name;
 static PyObject *__pyx_n_s_new;
 static PyObject *__pyx_kp_s_no_default___reduce___due_to_non;
 static PyObject *__pyx_n_s_parse;
 static PyObject *__pyx_n_s_parse_file;
+static PyObject *__pyx_n_s_pc;
 static PyObject *__pyx_n_s_pickle;
 static PyObject *__pyx_n_s_prepare;
+static PyObject *__pyx_n_s_pt;
+static PyObject *__pyx_n_s_px;
 static PyObject *__pyx_n_s_pyx_PickleError;
 static PyObject *__pyx_n_s_pyx_checksum;
 static PyObject *__pyx_n_s_pyx_result;
@@ -1275,7 +1301,8 @@ static PyObject *__pyx_kp_s_stringsource;
 static PyObject *__pyx_n_s_svg;
 static PyObject *__pyx_n_u_svg;
 static PyObject *__pyx_n_s_svg___init;
-static PyObject *__pyx_kp_s_svg_parser_pyx;
+static PyObject *__pyx_kp_s_svg_parser_pyi;
+static PyObject *__pyx_n_s_sys;
 static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_tx;
 static PyObject *__pyx_n_s_ty;
@@ -1295,16 +1322,14 @@ static PyObject *__pyx_pf_3svg_8__init___6Parser_4__reduce_cython__(struct __pyx
 static PyObject *__pyx_pf_3svg_8__init___6Parser_6__setstate_cython__(struct __pyx_obj_3svg_8__init___Parser *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_3svg_8__init___10Rasterizer___cinit__(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self); /* proto */
 static void __pyx_pf_3svg_8__init___10Rasterizer_2__dealloc__(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_4rasterize(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self, struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg, PyObject *__pyx_v_width, PyObject *__pyx_v_height, double __pyx_v_scale, PyObject *__pyx_v_tx, PyObject *__pyx_v_ty); /* proto */
-static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self, struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg, PyObject *__pyx_v_width, PyObject *__pyx_v_height, double __pyx_v_scale, PyObject *__pyx_v_tx, PyObject *__pyx_v_ty, PyObject *__pyx_v_stride, PyObject *__pyx_v_buffer); /* proto */
+static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_4rasterize(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self, struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg, int __pyx_v_width, int __pyx_v_height, float __pyx_v_scale, int __pyx_v_tx, int __pyx_v_ty); /* proto */
+static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self, struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg, int __pyx_v_width, int __pyx_v_height, int __pyx_v_stride, PyObject *__pyx_v_buffer, float __pyx_v_scale, int __pyx_v_tx, int __pyx_v_ty); /* proto */
 static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_8__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_10__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_pf_3svg_8__init___2__pyx_unpickle_Parser(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_3svg_8__init___SVG(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_3svg_8__init___Parser(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static PyObject *__pyx_tp_new_3svg_8__init___Rasterizer(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
-static PyObject *__pyx_int_0;
-static PyObject *__pyx_int_4;
 static PyObject *__pyx_int_222419149;
 static PyObject *__pyx_tuple_;
 static PyObject *__pyx_tuple__2;
@@ -1328,7 +1353,7 @@ static PyObject *__pyx_codeobj__17;
 static PyObject *__pyx_codeobj__19;
 static PyObject *__pyx_codeobj__21;
 
-/* "svg/svg.pyx":5
+/* "svg/svg.pyi":5
  *     cdef NSVGimage* _nsvgimage
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -1357,7 +1382,7 @@ static int __pyx_pf_3svg_8__init___3SVG___cinit__(struct __pyx_obj_3svg_8__init_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "svg/svg.pyx":6
+  /* "svg/svg.pyi":6
  * 
  *     def __cinit__(self):
  *         self._nsvgimage = NULL             # <<<<<<<<<<<<<<
@@ -1366,7 +1391,7 @@ static int __pyx_pf_3svg_8__init___3SVG___cinit__(struct __pyx_obj_3svg_8__init_
  */
   __pyx_v_self->_nsvgimage = NULL;
 
-  /* "svg/svg.pyx":5
+  /* "svg/svg.pyi":5
  *     cdef NSVGimage* _nsvgimage
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -1380,7 +1405,7 @@ static int __pyx_pf_3svg_8__init___3SVG___cinit__(struct __pyx_obj_3svg_8__init_
   return __pyx_r;
 }
 
-/* "svg/svg.pyx":8
+/* "svg/svg.pyi":8
  *         self._nsvgimage = NULL
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -1404,7 +1429,7 @@ static void __pyx_pf_3svg_8__init___3SVG_2__dealloc__(struct __pyx_obj_3svg_8__i
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "svg/svg.pyx":9
+  /* "svg/svg.pyi":9
  * 
  *     def __dealloc__(self):
  *         if self._nsvgimage != NULL:             # <<<<<<<<<<<<<<
@@ -1414,7 +1439,7 @@ static void __pyx_pf_3svg_8__init___3SVG_2__dealloc__(struct __pyx_obj_3svg_8__i
   __pyx_t_1 = ((__pyx_v_self->_nsvgimage != NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "svg/svg.pyx":10
+    /* "svg/svg.pyi":10
  *     def __dealloc__(self):
  *         if self._nsvgimage != NULL:
  *             nsvgDelete(self._nsvgimage)             # <<<<<<<<<<<<<<
@@ -1423,7 +1448,7 @@ static void __pyx_pf_3svg_8__init___3SVG_2__dealloc__(struct __pyx_obj_3svg_8__i
  */
     nsvgDelete(__pyx_v_self->_nsvgimage);
 
-    /* "svg/svg.pyx":9
+    /* "svg/svg.pyi":9
  * 
  *     def __dealloc__(self):
  *         if self._nsvgimage != NULL:             # <<<<<<<<<<<<<<
@@ -1432,7 +1457,7 @@ static void __pyx_pf_3svg_8__init___3SVG_2__dealloc__(struct __pyx_obj_3svg_8__i
  */
   }
 
-  /* "svg/svg.pyx":8
+  /* "svg/svg.pyi":8
  *         self._nsvgimage = NULL
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -1444,7 +1469,7 @@ static void __pyx_pf_3svg_8__init___3SVG_2__dealloc__(struct __pyx_obj_3svg_8__i
   __Pyx_RefNannyFinishContext();
 }
 
-/* "svg/svg.pyx":13
+/* "svg/svg.pyi":13
  * 
  *     @property
  *     def width(self) -> int:             # <<<<<<<<<<<<<<
@@ -1472,7 +1497,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_5width___get__(struct __pyx_obj_3s
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "svg/svg.pyx":15
+  /* "svg/svg.pyi":15
  *     def width(self) -> int:
  *         """Returns the width of the svg image."""
  *         if self._nsvgimage == NULL:             # <<<<<<<<<<<<<<
@@ -1482,7 +1507,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_5width___get__(struct __pyx_obj_3s
   __pyx_t_1 = ((__pyx_v_self->_nsvgimage == NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "svg/svg.pyx":16
+    /* "svg/svg.pyi":16
  *         """Returns the width of the svg image."""
  *         if self._nsvgimage == NULL:
  *             raise ValueError("SVG has not been parsed yet.")             # <<<<<<<<<<<<<<
@@ -1495,7 +1520,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_5width___get__(struct __pyx_obj_3s
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __PYX_ERR(1, 16, __pyx_L1_error)
 
-    /* "svg/svg.pyx":15
+    /* "svg/svg.pyi":15
  *     def width(self) -> int:
  *         """Returns the width of the svg image."""
  *         if self._nsvgimage == NULL:             # <<<<<<<<<<<<<<
@@ -1504,7 +1529,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_5width___get__(struct __pyx_obj_3s
  */
   }
 
-  /* "svg/svg.pyx":17
+  /* "svg/svg.pyi":17
  *         if self._nsvgimage == NULL:
  *             raise ValueError("SVG has not been parsed yet.")
  *         return int(self._nsvgimage.width)             # <<<<<<<<<<<<<<
@@ -1518,7 +1543,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_5width___get__(struct __pyx_obj_3s
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "svg/svg.pyx":13
+  /* "svg/svg.pyi":13
  * 
  *     @property
  *     def width(self) -> int:             # <<<<<<<<<<<<<<
@@ -1537,7 +1562,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_5width___get__(struct __pyx_obj_3s
   return __pyx_r;
 }
 
-/* "svg/svg.pyx":20
+/* "svg/svg.pyi":20
  * 
  *     @property
  *     def height(self) -> int:             # <<<<<<<<<<<<<<
@@ -1565,7 +1590,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_6height___get__(struct __pyx_obj_3
   PyObject *__pyx_t_2 = NULL;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "svg/svg.pyx":22
+  /* "svg/svg.pyi":22
  *     def height(self) -> int:
  *         """Returns the height of the svg image."""
  *         if self._nsvgimage == NULL:             # <<<<<<<<<<<<<<
@@ -1575,7 +1600,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_6height___get__(struct __pyx_obj_3
   __pyx_t_1 = ((__pyx_v_self->_nsvgimage == NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "svg/svg.pyx":23
+    /* "svg/svg.pyi":23
  *         """Returns the height of the svg image."""
  *         if self._nsvgimage == NULL:
  *             raise ValueError("SVG has not been parsed yet.")             # <<<<<<<<<<<<<<
@@ -1587,7 +1612,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_6height___get__(struct __pyx_obj_3
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __PYX_ERR(1, 23, __pyx_L1_error)
 
-    /* "svg/svg.pyx":22
+    /* "svg/svg.pyi":22
  *     def height(self) -> int:
  *         """Returns the height of the svg image."""
  *         if self._nsvgimage == NULL:             # <<<<<<<<<<<<<<
@@ -1596,7 +1621,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_6height___get__(struct __pyx_obj_3
  */
   }
 
-  /* "svg/svg.pyx":24
+  /* "svg/svg.pyi":24
  *         if self._nsvgimage == NULL:
  *             raise ValueError("SVG has not been parsed yet.")
  *         return int(self._nsvgimage.height)             # <<<<<<<<<<<<<<
@@ -1608,7 +1633,7 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_6height___get__(struct __pyx_obj_3
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "svg/svg.pyx":20
+  /* "svg/svg.pyi":20
  * 
  *     @property
  *     def height(self) -> int:             # <<<<<<<<<<<<<<
@@ -1734,12 +1759,12 @@ static PyObject *__pyx_pf_3svg_8__init___3SVG_6__setstate_cython__(CYTHON_UNUSED
   return __pyx_r;
 }
 
-/* "svg/parser.pyx":8
- * 
+/* "svg/parser.pyi":10
+ * VALID_DPI_UNITS = ('px', 'pt', 'pc', 'mm', 'cm', 'in')
  * 
  * def _dpi_conv(dpi: str):             # <<<<<<<<<<<<<<
- *     units = dpi[-2:].encode('UTF-8')
- *     _dpi = float(dpi[:-2])
+ *     if dpi[-2:] not in VALID_DPI_UNITS:
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))
  */
 
 /* Python wrapper */
@@ -1749,7 +1774,7 @@ static PyObject *__pyx_pw_3svg_8__init___1_dpi_conv(PyObject *__pyx_self, PyObje
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("_dpi_conv (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dpi), (&PyString_Type), 1, "dpi", 1))) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dpi), (&PyString_Type), 1, "dpi", 1))) __PYX_ERR(0, 10, __pyx_L1_error)
   __pyx_r = __pyx_pf_3svg_8__init____dpi_conv(__pyx_self, ((PyObject*)__pyx_v_dpi));
 
   /* function exit code */
@@ -1768,33 +1793,148 @@ static PyObject *__pyx_pf_3svg_8__init____dpi_conv(CYTHON_UNUSED PyObject *__pyx
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
-  double __pyx_t_3;
+  int __pyx_t_3;
+  int __pyx_t_4;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyObject *__pyx_t_7 = NULL;
+  int __pyx_t_8;
+  PyObject *__pyx_t_9 = NULL;
+  double __pyx_t_10;
   __Pyx_RefNannySetupContext("_dpi_conv", 0);
 
-  /* "svg/parser.pyx":9
+  /* "svg/parser.pyi":11
  * 
  * def _dpi_conv(dpi: str):
+ *     if dpi[-2:] not in VALID_DPI_UNITS:             # <<<<<<<<<<<<<<
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))
+ *     units = dpi[-2:].encode('UTF-8')
+ */
+  if (unlikely(__pyx_v_dpi == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+    __PYX_ERR(0, 11, __pyx_L1_error)
+  }
+  __pyx_t_1 = PySequence_GetSlice(__pyx_v_dpi, -2L, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_VALID_DPI_UNITS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_t_2, Py_NE)); if (unlikely(__pyx_t_3 < 0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_4 = (__pyx_t_3 != 0);
+  if (__pyx_t_4) {
+
+    /* "svg/parser.pyi":12
+ * def _dpi_conv(dpi: str):
+ *     if dpi[-2:] not in VALID_DPI_UNITS:
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))             # <<<<<<<<<<<<<<
+ *     units = dpi[-2:].encode('UTF-8')
+ *     _dpi = float(dpi[:-2])
+ */
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_dpi_needs_to_be_one_of_got, __pyx_n_s_format); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_VALID_DPI_UNITS); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 12, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    if (unlikely(__pyx_v_dpi == Py_None)) {
+      PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
+      __PYX_ERR(0, 12, __pyx_L1_error)
+    }
+    __pyx_t_6 = PySequence_GetSlice(__pyx_v_dpi, -2L, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 12, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_7 = NULL;
+    __pyx_t_8 = 0;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_1))) {
+      __pyx_t_7 = PyMethod_GET_SELF(__pyx_t_1);
+      if (likely(__pyx_t_7)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+        __Pyx_INCREF(__pyx_t_7);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_1, function);
+        __pyx_t_8 = 1;
+      }
+    }
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_1)) {
+      PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_5, __pyx_t_6};
+      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
+      PyObject *__pyx_temp[3] = {__pyx_t_7, __pyx_t_5, __pyx_t_6};
+      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-__pyx_t_8, 2+__pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    } else
+    #endif
+    {
+      __pyx_t_9 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 12, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_9);
+      if (__pyx_t_7) {
+        __Pyx_GIVEREF(__pyx_t_7); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_7); __pyx_t_7 = NULL;
+      }
+      __Pyx_GIVEREF(__pyx_t_5);
+      PyTuple_SET_ITEM(__pyx_t_9, 0+__pyx_t_8, __pyx_t_5);
+      __Pyx_GIVEREF(__pyx_t_6);
+      PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_8, __pyx_t_6);
+      __pyx_t_5 = 0;
+      __pyx_t_6 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_GIVEREF(__pyx_t_2);
+    PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
+    __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __PYX_ERR(0, 12, __pyx_L1_error)
+
+    /* "svg/parser.pyi":11
+ * 
+ * def _dpi_conv(dpi: str):
+ *     if dpi[-2:] not in VALID_DPI_UNITS:             # <<<<<<<<<<<<<<
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))
+ *     units = dpi[-2:].encode('UTF-8')
+ */
+  }
+
+  /* "svg/parser.pyi":13
+ *     if dpi[-2:] not in VALID_DPI_UNITS:
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))
  *     units = dpi[-2:].encode('UTF-8')             # <<<<<<<<<<<<<<
  *     _dpi = float(dpi[:-2])
  *     return units, _dpi
  */
   if (unlikely(__pyx_v_dpi == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 9, __pyx_L1_error)
+    __PYX_ERR(0, 13, __pyx_L1_error)
   }
-  __pyx_t_1 = PySequence_GetSlice(__pyx_v_dpi, -2L, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_2 = PySequence_GetSlice(__pyx_v_dpi, -2L, PY_SSIZE_T_MAX); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_encode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_units = __pyx_t_1;
-  __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__5, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_v_units = __pyx_t_2;
+  __pyx_t_2 = 0;
 
-  /* "svg/parser.pyx":10
- * def _dpi_conv(dpi: str):
+  /* "svg/parser.pyi":14
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))
  *     units = dpi[-2:].encode('UTF-8')
  *     _dpi = float(dpi[:-2])             # <<<<<<<<<<<<<<
  *     return units, _dpi
@@ -1802,15 +1942,15 @@ static PyObject *__pyx_pf_3svg_8__init____dpi_conv(CYTHON_UNUSED PyObject *__pyx
  */
   if (unlikely(__pyx_v_dpi == Py_None)) {
     PyErr_SetString(PyExc_TypeError, "'NoneType' object is not subscriptable");
-    __PYX_ERR(0, 10, __pyx_L1_error)
+    __PYX_ERR(0, 14, __pyx_L1_error)
   }
-  __pyx_t_1 = PySequence_GetSlice(__pyx_v_dpi, 0, -2L); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_AsDouble(__pyx_t_1); if (unlikely(__pyx_t_3 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v__dpi = __pyx_t_3;
+  __pyx_t_2 = PySequence_GetSlice(__pyx_v_dpi, 0, -2L); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_10 = __Pyx_PyObject_AsDouble(__pyx_t_2); if (unlikely(__pyx_t_10 == ((double)((double)-1)) && PyErr_Occurred())) __PYX_ERR(0, 14, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v__dpi = __pyx_t_10;
 
-  /* "svg/parser.pyx":11
+  /* "svg/parser.pyi":15
  *     units = dpi[-2:].encode('UTF-8')
  *     _dpi = float(dpi[:-2])
  *     return units, _dpi             # <<<<<<<<<<<<<<
@@ -1818,32 +1958,36 @@ static PyObject *__pyx_pf_3svg_8__init____dpi_conv(CYTHON_UNUSED PyObject *__pyx
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v__dpi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v__dpi); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_units);
   __Pyx_GIVEREF(__pyx_v_units);
-  PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_units);
-  __Pyx_GIVEREF(__pyx_t_1);
-  PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_1);
-  __pyx_t_1 = 0;
-  __pyx_r = __pyx_t_2;
+  PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_units);
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
   __pyx_t_2 = 0;
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "svg/parser.pyx":8
- * 
+  /* "svg/parser.pyi":10
+ * VALID_DPI_UNITS = ('px', 'pt', 'pc', 'mm', 'cm', 'in')
  * 
  * def _dpi_conv(dpi: str):             # <<<<<<<<<<<<<<
- *     units = dpi[-2:].encode('UTF-8')
- *     _dpi = float(dpi[:-2])
+ *     if dpi[-2:] not in VALID_DPI_UNITS:
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))
  */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_9);
   __Pyx_AddTraceback("svg.__init__._dpi_conv", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -1853,7 +1997,7 @@ static PyObject *__pyx_pf_3svg_8__init____dpi_conv(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "svg/parser.pyx":20
+/* "svg/parser.pyi":24
  * 
  *     @staticmethod
  *     def parse(svg: str, dpi: str = '96px') -> SVG:             # <<<<<<<<<<<<<<
@@ -1899,7 +2043,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pw_3svg_8__init___6Parser_1par
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "parse") < 0)) __PYX_ERR(0, 20, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "parse") < 0)) __PYX_ERR(0, 24, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -1915,14 +2059,14 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pw_3svg_8__init___6Parser_1par
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("parse", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 20, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("parse", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 24, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("svg.__init__.Parser.parse", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_svg), (&PyString_Type), 1, "svg", 1))) __PYX_ERR(0, 20, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dpi), (&PyString_Type), 1, "dpi", 1))) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_svg), (&PyString_Type), 1, "svg", 1))) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dpi), (&PyString_Type), 1, "dpi", 1))) __PYX_ERR(0, 24, __pyx_L1_error)
   __pyx_r = __pyx_pf_3svg_8__init___6Parser_parse(__pyx_v_svg, __pyx_v_dpi);
 
   /* function exit code */
@@ -1951,14 +2095,14 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
   int __pyx_t_9;
   __Pyx_RefNannySetupContext("parse", 0);
 
-  /* "svg/parser.pyx":25
+  /* "svg/parser.pyi":29
  *         'pc' 'mm', 'cm', or 'in'.
  *         """
  *         units, magnitude = _dpi_conv(dpi)             # <<<<<<<<<<<<<<
  *         im = SVG()
  *         im._nsvgimage = nsvgParse(svg.encode('UTF-8'), units, magnitude)
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_dpi_conv); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_dpi_conv); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -1971,13 +2115,13 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dpi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dpi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_dpi};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -1985,19 +2129,19 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_dpi};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 25, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 29, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_INCREF(__pyx_v_dpi);
       __Pyx_GIVEREF(__pyx_v_dpi);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_dpi);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -2013,7 +2157,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 25, __pyx_L1_error)
+      __PYX_ERR(0, 29, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -2026,15 +2170,15 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
     __Pyx_INCREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_t_4);
     #else
-    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_5 = Py_TYPE(__pyx_t_3)->tp_iternext;
@@ -2042,7 +2186,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
     __Pyx_GOTREF(__pyx_t_2);
     index = 1; __pyx_t_4 = __pyx_t_5(__pyx_t_3); if (unlikely(!__pyx_t_4)) goto __pyx_L3_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_4);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_5(__pyx_t_3), 2) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_5(__pyx_t_3), 2) < 0) __PYX_ERR(0, 29, __pyx_L1_error)
     __pyx_t_5 = NULL;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     goto __pyx_L4_unpacking_done;
@@ -2050,7 +2194,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_5 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 25, __pyx_L1_error)
+    __PYX_ERR(0, 29, __pyx_L1_error)
     __pyx_L4_unpacking_done:;
   }
   __pyx_v_units = __pyx_t_2;
@@ -2058,37 +2202,37 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
   __pyx_v_magnitude = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "svg/parser.pyx":26
+  /* "svg/parser.pyi":30
  *         """
  *         units, magnitude = _dpi_conv(dpi)
  *         im = SVG()             # <<<<<<<<<<<<<<
  *         im._nsvgimage = nsvgParse(svg.encode('UTF-8'), units, magnitude)
  *         if im._nsvgimage == NULL:
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_3svg_8__init___SVG), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_3svg_8__init___SVG), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_im = ((struct __pyx_obj_3svg_8__init___SVG *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "svg/parser.pyx":27
+  /* "svg/parser.pyi":31
  *         units, magnitude = _dpi_conv(dpi)
  *         im = SVG()
  *         im._nsvgimage = nsvgParse(svg.encode('UTF-8'), units, magnitude)             # <<<<<<<<<<<<<<
  *         if im._nsvgimage == NULL:
  *             raise SVGParserError("Could not parse SVG from string.")
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_svg, __pyx_n_s_encode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_svg, __pyx_n_s_encode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_6 = __Pyx_PyObject_AsWritableString(__pyx_t_4); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_PyObject_AsString(__pyx_v_units); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L1_error)
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_v_magnitude); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_AsWritableString(__pyx_t_4); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_AsString(__pyx_v_units); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_v_magnitude); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 31, __pyx_L1_error)
   __pyx_v_im->_nsvgimage = nsvgParse(__pyx_t_6, __pyx_t_7, __pyx_t_8);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "svg/parser.pyx":28
+  /* "svg/parser.pyi":32
  *         im = SVG()
  *         im._nsvgimage = nsvgParse(svg.encode('UTF-8'), units, magnitude)
  *         if im._nsvgimage == NULL:             # <<<<<<<<<<<<<<
@@ -2098,23 +2242,23 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
   __pyx_t_9 = ((__pyx_v_im->_nsvgimage == NULL) != 0);
   if (__pyx_t_9) {
 
-    /* "svg/parser.pyx":29
+    /* "svg/parser.pyi":33
  *         im._nsvgimage = nsvgParse(svg.encode('UTF-8'), units, magnitude)
  *         if im._nsvgimage == NULL:
  *             raise SVGParserError("Could not parse SVG from string.")             # <<<<<<<<<<<<<<
  *         else:
  *             return im
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_SVGParserError); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 29, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_SVGParserError); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 33, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__7, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_Raise(__pyx_t_1, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __PYX_ERR(0, 29, __pyx_L1_error)
+    __PYX_ERR(0, 33, __pyx_L1_error)
 
-    /* "svg/parser.pyx":28
+    /* "svg/parser.pyi":32
  *         im = SVG()
  *         im._nsvgimage = nsvgParse(svg.encode('UTF-8'), units, magnitude)
  *         if im._nsvgimage == NULL:             # <<<<<<<<<<<<<<
@@ -2123,7 +2267,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
  */
   }
 
-  /* "svg/parser.pyx":31
+  /* "svg/parser.pyi":35
  *             raise SVGParserError("Could not parse SVG from string.")
  *         else:
  *             return im             # <<<<<<<<<<<<<<
@@ -2137,7 +2281,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
     goto __pyx_L0;
   }
 
-  /* "svg/parser.pyx":20
+  /* "svg/parser.pyi":24
  * 
  *     @staticmethod
  *     def parse(svg: str, dpi: str = '96px') -> SVG:             # <<<<<<<<<<<<<<
@@ -2162,7 +2306,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_pars
   return __pyx_r;
 }
 
-/* "svg/parser.pyx":34
+/* "svg/parser.pyi":38
  * 
  *     @staticmethod
  *     def parse_file(filename: str, dpi: str = '96px') -> SVG:             # <<<<<<<<<<<<<<
@@ -2208,7 +2352,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pw_3svg_8__init___6Parser_3par
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "parse_file") < 0)) __PYX_ERR(0, 34, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "parse_file") < 0)) __PYX_ERR(0, 38, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -2224,14 +2368,14 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pw_3svg_8__init___6Parser_3par
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("parse_file", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 34, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("parse_file", 0, 1, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 38, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("svg.__init__.Parser.parse_file", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_filename), (&PyString_Type), 1, "filename", 1))) __PYX_ERR(0, 34, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dpi), (&PyString_Type), 1, "dpi", 1))) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_filename), (&PyString_Type), 1, "filename", 1))) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_dpi), (&PyString_Type), 1, "dpi", 1))) __PYX_ERR(0, 38, __pyx_L1_error)
   __pyx_r = __pyx_pf_3svg_8__init___6Parser_2parse_file(__pyx_v_filename, __pyx_v_dpi);
 
   /* function exit code */
@@ -2254,84 +2398,150 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_2par
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
   PyObject *__pyx_t_4 = NULL;
-  PyObject *(*__pyx_t_5)(PyObject *);
-  char const *__pyx_t_6;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *(*__pyx_t_6)(PyObject *);
   char const *__pyx_t_7;
-  float __pyx_t_8;
-  int __pyx_t_9;
-  PyObject *__pyx_t_10 = NULL;
+  char const *__pyx_t_8;
+  float __pyx_t_9;
+  int __pyx_t_10;
   PyObject *__pyx_t_11 = NULL;
   __Pyx_RefNannySetupContext("parse_file", 0);
 
-  /* "svg/parser.pyx":39
+  /* "svg/parser.pyi":43
  *         'pc' 'mm', 'cm', or 'in'.
  *         """
- *         file = filename.encode('UTF-8')             # <<<<<<<<<<<<<<
+ *         file = filename.encode(sys.getfilesystemencoding())             # <<<<<<<<<<<<<<
  *         units, magnitude = _dpi_conv(dpi)
  *         im = SVG()
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_filename, __pyx_n_s_encode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_filename, __pyx_n_s_encode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_file = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_getfilesystemencoding); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __pyx_t_4 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_5))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_5);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_5, function);
+    }
+  }
+  if (__pyx_t_4) {
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  } else {
+    __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 43, __pyx_L1_error)
+  }
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_5 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (!__pyx_t_5) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_GOTREF(__pyx_t_1);
+  } else {
+    #if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(__pyx_t_2)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_3};
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    } else
+    #endif
+    #if CYTHON_FAST_PYCCALL
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_t_3};
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    } else
+    #endif
+    {
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5); __pyx_t_5 = NULL;
+      __Pyx_GIVEREF(__pyx_t_3);
+      PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_t_3);
+      __pyx_t_3 = 0;
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    }
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_v_file = __pyx_t_1;
+  __pyx_t_1 = 0;
 
-  /* "svg/parser.pyx":40
+  /* "svg/parser.pyi":44
  *         """
- *         file = filename.encode('UTF-8')
+ *         file = filename.encode(sys.getfilesystemencoding())
  *         units, magnitude = _dpi_conv(dpi)             # <<<<<<<<<<<<<<
  *         im = SVG()
  *         im._nsvgimage = nsvgParseFromFile(file, units, magnitude)
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_dpi_conv); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = NULL;
-  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_1);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_dpi_conv); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_4)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_4);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_1, function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
     }
   }
-  if (!__pyx_t_3) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_dpi); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
+  if (!__pyx_t_4) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dpi); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
-    if (PyFunction_Check(__pyx_t_1)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_dpi};
-      __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
+    if (PyFunction_Check(__pyx_t_2)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_v_dpi};
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     #if CYTHON_FAST_PYCCALL
-    if (__Pyx_PyFastCFunction_Check(__pyx_t_1)) {
-      PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_dpi};
-      __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_1, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
-      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __Pyx_GOTREF(__pyx_t_2);
+    if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
+      PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_v_dpi};
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
+      __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
       __Pyx_INCREF(__pyx_v_dpi);
       __Pyx_GIVEREF(__pyx_v_dpi);
-      PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_dpi);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_4, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_dpi);
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     }
   }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if ((likely(PyTuple_CheckExact(__pyx_t_2))) || (PyList_CheckExact(__pyx_t_2))) {
-    PyObject* sequence = __pyx_t_2;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
+    PyObject* sequence = __pyx_t_1;
     #if !CYTHON_COMPILING_IN_PYPY
     Py_ssize_t size = Py_SIZE(sequence);
     #else
@@ -2340,198 +2550,198 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_2par
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 40, __pyx_L1_error)
+      __PYX_ERR(0, 44, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
-      __pyx_t_1 = PyTuple_GET_ITEM(sequence, 0); 
-      __pyx_t_4 = PyTuple_GET_ITEM(sequence, 1); 
+      __pyx_t_2 = PyTuple_GET_ITEM(sequence, 0); 
+      __pyx_t_3 = PyTuple_GET_ITEM(sequence, 1); 
     } else {
-      __pyx_t_1 = PyList_GET_ITEM(sequence, 0); 
-      __pyx_t_4 = PyList_GET_ITEM(sequence, 1); 
+      __pyx_t_2 = PyList_GET_ITEM(sequence, 0); 
+      __pyx_t_3 = PyList_GET_ITEM(sequence, 1); 
     }
-    __Pyx_INCREF(__pyx_t_1);
-    __Pyx_INCREF(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx_t_3);
     #else
-    __pyx_t_1 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_2 = PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_3 = PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 44, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     #endif
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_3 = PyObject_GetIter(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_5 = Py_TYPE(__pyx_t_3)->tp_iternext;
-    index = 0; __pyx_t_1 = __pyx_t_5(__pyx_t_3); if (unlikely(!__pyx_t_1)) goto __pyx_L3_unpacking_failed;
-    __Pyx_GOTREF(__pyx_t_1);
-    index = 1; __pyx_t_4 = __pyx_t_5(__pyx_t_3); if (unlikely(!__pyx_t_4)) goto __pyx_L3_unpacking_failed;
+    __pyx_t_4 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_5(__pyx_t_3), 2) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
-    __pyx_t_5 = NULL;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_6 = Py_TYPE(__pyx_t_4)->tp_iternext;
+    index = 0; __pyx_t_2 = __pyx_t_6(__pyx_t_4); if (unlikely(!__pyx_t_2)) goto __pyx_L3_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_2);
+    index = 1; __pyx_t_3 = __pyx_t_6(__pyx_t_4); if (unlikely(!__pyx_t_3)) goto __pyx_L3_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_3);
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_6(__pyx_t_4), 2) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+    __pyx_t_6 = NULL;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     goto __pyx_L4_unpacking_done;
     __pyx_L3_unpacking_failed:;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = NULL;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_6 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 40, __pyx_L1_error)
+    __PYX_ERR(0, 44, __pyx_L1_error)
     __pyx_L4_unpacking_done:;
   }
-  __pyx_v_units = __pyx_t_1;
-  __pyx_t_1 = 0;
-  __pyx_v_magnitude = __pyx_t_4;
-  __pyx_t_4 = 0;
+  __pyx_v_units = __pyx_t_2;
+  __pyx_t_2 = 0;
+  __pyx_v_magnitude = __pyx_t_3;
+  __pyx_t_3 = 0;
 
-  /* "svg/parser.pyx":41
- *         file = filename.encode('UTF-8')
+  /* "svg/parser.pyi":45
+ *         file = filename.encode(sys.getfilesystemencoding())
  *         units, magnitude = _dpi_conv(dpi)
  *         im = SVG()             # <<<<<<<<<<<<<<
  *         im._nsvgimage = nsvgParseFromFile(file, units, magnitude)
  *         if im._nsvgimage == NULL:
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_3svg_8__init___SVG), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_v_im = ((struct __pyx_obj_3svg_8__init___SVG *)__pyx_t_2);
-  __pyx_t_2 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_3svg_8__init___SVG), __pyx_empty_tuple, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_im = ((struct __pyx_obj_3svg_8__init___SVG *)__pyx_t_1);
+  __pyx_t_1 = 0;
 
-  /* "svg/parser.pyx":42
+  /* "svg/parser.pyi":46
  *         units, magnitude = _dpi_conv(dpi)
  *         im = SVG()
  *         im._nsvgimage = nsvgParseFromFile(file, units, magnitude)             # <<<<<<<<<<<<<<
  *         if im._nsvgimage == NULL:
  *             raise SVGParserError(
  */
-  __pyx_t_6 = __Pyx_PyObject_AsString(__pyx_v_file); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_PyObject_AsString(__pyx_v_units); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L1_error)
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_v_magnitude); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L1_error)
-  __pyx_v_im->_nsvgimage = nsvgParseFromFile(__pyx_t_6, __pyx_t_7, __pyx_t_8);
+  __pyx_t_7 = __Pyx_PyObject_AsString(__pyx_v_file); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_AsString(__pyx_v_units); if (unlikely((!__pyx_t_8) && PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_9 = __pyx_PyFloat_AsFloat(__pyx_v_magnitude); if (unlikely((__pyx_t_9 == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_v_im->_nsvgimage = nsvgParseFromFile(__pyx_t_7, __pyx_t_8, __pyx_t_9);
 
-  /* "svg/parser.pyx":43
+  /* "svg/parser.pyi":47
  *         im = SVG()
  *         im._nsvgimage = nsvgParseFromFile(file, units, magnitude)
  *         if im._nsvgimage == NULL:             # <<<<<<<<<<<<<<
  *             raise SVGParserError(
  *                 "Could not parse SVG from {}".format(filename)
  */
-  __pyx_t_9 = ((__pyx_v_im->_nsvgimage == NULL) != 0);
-  if (__pyx_t_9) {
+  __pyx_t_10 = ((__pyx_v_im->_nsvgimage == NULL) != 0);
+  if (__pyx_t_10) {
 
-    /* "svg/parser.pyx":44
+    /* "svg/parser.pyi":48
  *         im._nsvgimage = nsvgParseFromFile(file, units, magnitude)
  *         if im._nsvgimage == NULL:
  *             raise SVGParserError(             # <<<<<<<<<<<<<<
  *                 "Could not parse SVG from {}".format(filename)
  *                 )
  */
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_SVGParserError); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 44, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_SVGParserError); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
 
-    /* "svg/parser.pyx":45
+    /* "svg/parser.pyi":49
  *         if im._nsvgimage == NULL:
  *             raise SVGParserError(
  *                 "Could not parse SVG from {}".format(filename)             # <<<<<<<<<<<<<<
  *                 )
  *         else:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Could_not_parse_SVG_from, __pyx_n_s_format); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 45, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_10 = NULL;
-    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
-      __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_3);
-      if (likely(__pyx_t_10)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-        __Pyx_INCREF(__pyx_t_10);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_3, function);
-      }
-    }
-    if (!__pyx_t_10) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_filename); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-    } else {
-      #if CYTHON_FAST_PYCALL
-      if (PyFunction_Check(__pyx_t_3)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_10, __pyx_v_filename};
-        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __Pyx_GOTREF(__pyx_t_1);
-      } else
-      #endif
-      #if CYTHON_FAST_PYCCALL
-      if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_10, __pyx_v_filename};
-        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __Pyx_GOTREF(__pyx_t_1);
-      } else
-      #endif
-      {
-        __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 45, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_11);
-        __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_10); __pyx_t_10 = NULL;
-        __Pyx_INCREF(__pyx_v_filename);
-        __Pyx_GIVEREF(__pyx_v_filename);
-        PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_v_filename);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_1);
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      }
-    }
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = NULL;
-    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_3)) {
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_Could_not_parse_SVG_from, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 49, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_5 = NULL;
+    if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_5)) {
         PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_3);
+        __Pyx_INCREF(__pyx_t_5);
         __Pyx_INCREF(function);
         __Pyx_DECREF_SET(__pyx_t_4, function);
       }
     }
-    if (!__pyx_t_3) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    if (!__pyx_t_5) {
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_filename); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_4)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_t_1};
-        __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+        PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_v_filename};
+        __pyx_t_2 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_2);
-        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       } else
       #endif
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
-        PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_t_1};
-        __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
-        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+        PyObject *__pyx_temp[2] = {__pyx_t_5, __pyx_v_filename};
+        __pyx_t_2 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_2);
-        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       } else
       #endif
       {
-        __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 44, __pyx_L1_error)
+        __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 49, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_3); __pyx_t_3 = NULL;
-        __Pyx_GIVEREF(__pyx_t_1);
-        PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_t_1);
-        __pyx_t_1 = 0;
-        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_11, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+        __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_5); __pyx_t_5 = NULL;
+        __Pyx_INCREF(__pyx_v_filename);
+        __Pyx_GIVEREF(__pyx_v_filename);
+        PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_v_filename);
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_11, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       }
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_Raise(__pyx_t_2, 0, 0, 0);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 44, __pyx_L1_error)
+    __pyx_t_4 = NULL;
+    if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_3);
+      if (likely(__pyx_t_4)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+        __Pyx_INCREF(__pyx_t_4);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_3, function);
+      }
+    }
+    if (!__pyx_t_4) {
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_GOTREF(__pyx_t_1);
+    } else {
+      #if CYTHON_FAST_PYCALL
+      if (PyFunction_Check(__pyx_t_3)) {
+        PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_t_2};
+        __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __Pyx_GOTREF(__pyx_t_1);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      } else
+      #endif
+      #if CYTHON_FAST_PYCCALL
+      if (__Pyx_PyFastCFunction_Check(__pyx_t_3)) {
+        PyObject *__pyx_temp[2] = {__pyx_t_4, __pyx_t_2};
+        __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_3, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+        __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __Pyx_GOTREF(__pyx_t_1);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      } else
+      #endif
+      {
+        __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 48, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_11);
+        __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_4); __pyx_t_4 = NULL;
+        __Pyx_GIVEREF(__pyx_t_2);
+        PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_t_2);
+        __pyx_t_2 = 0;
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      }
+    }
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_Raise(__pyx_t_1, 0, 0, 0);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __PYX_ERR(0, 48, __pyx_L1_error)
 
-    /* "svg/parser.pyx":43
+    /* "svg/parser.pyi":47
  *         im = SVG()
  *         im._nsvgimage = nsvgParseFromFile(file, units, magnitude)
  *         if im._nsvgimage == NULL:             # <<<<<<<<<<<<<<
@@ -2540,7 +2750,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_2par
  */
   }
 
-  /* "svg/parser.pyx":48
+  /* "svg/parser.pyi":52
  *                 )
  *         else:
  *             return im             # <<<<<<<<<<<<<<
@@ -2552,7 +2762,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_2par
     goto __pyx_L0;
   }
 
-  /* "svg/parser.pyx":34
+  /* "svg/parser.pyi":38
  * 
  *     @staticmethod
  *     def parse_file(filename: str, dpi: str = '96px') -> SVG:             # <<<<<<<<<<<<<<
@@ -2566,7 +2776,7 @@ static struct __pyx_obj_3svg_8__init___SVG *__pyx_pf_3svg_8__init___6Parser_2par
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_11);
   __Pyx_AddTraceback("svg.__init__.Parser.parse_file", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
@@ -2861,7 +3071,7 @@ static PyObject *__pyx_pf_3svg_8__init___6Parser_6__setstate_cython__(struct __p
   return __pyx_r;
 }
 
-/* "svg/rasterizer.pyx":13
+/* "svg/rasterizer.pyi":13
  *     cdef NSVGrasterizer* _nsvgrasterizer
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -2890,7 +3100,7 @@ static int __pyx_pf_3svg_8__init___10Rasterizer___cinit__(struct __pyx_obj_3svg_
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "svg/rasterizer.pyx":14
+  /* "svg/rasterizer.pyi":14
  * 
  *     def __cinit__(self):
  *         self._nsvgrasterizer = nsvgCreateRasterizer()             # <<<<<<<<<<<<<<
@@ -2899,7 +3109,7 @@ static int __pyx_pf_3svg_8__init___10Rasterizer___cinit__(struct __pyx_obj_3svg_
  */
   __pyx_v_self->_nsvgrasterizer = nsvgCreateRasterizer();
 
-  /* "svg/rasterizer.pyx":13
+  /* "svg/rasterizer.pyi":13
  *     cdef NSVGrasterizer* _nsvgrasterizer
  * 
  *     def __cinit__(self):             # <<<<<<<<<<<<<<
@@ -2913,7 +3123,7 @@ static int __pyx_pf_3svg_8__init___10Rasterizer___cinit__(struct __pyx_obj_3svg_
   return __pyx_r;
 }
 
-/* "svg/rasterizer.pyx":16
+/* "svg/rasterizer.pyi":16
  *         self._nsvgrasterizer = nsvgCreateRasterizer()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2937,7 +3147,7 @@ static void __pyx_pf_3svg_8__init___10Rasterizer_2__dealloc__(struct __pyx_obj_3
   int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
-  /* "svg/rasterizer.pyx":17
+  /* "svg/rasterizer.pyi":17
  * 
  *     def __dealloc__(self):
  *         if self._nsvgrasterizer != NULL:             # <<<<<<<<<<<<<<
@@ -2947,16 +3157,16 @@ static void __pyx_pf_3svg_8__init___10Rasterizer_2__dealloc__(struct __pyx_obj_3
   __pyx_t_1 = ((__pyx_v_self->_nsvgrasterizer != NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "svg/rasterizer.pyx":18
+    /* "svg/rasterizer.pyi":18
  *     def __dealloc__(self):
  *         if self._nsvgrasterizer != NULL:
  *             nsvgDeleteRasterizer(self._nsvgrasterizer)             # <<<<<<<<<<<<<<
  * 
- *     def rasterize(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0) -> bytes:
+ *     def rasterize(self, svg: SVG,
  */
     nsvgDeleteRasterizer(__pyx_v_self->_nsvgrasterizer);
 
-    /* "svg/rasterizer.pyx":17
+    /* "svg/rasterizer.pyi":17
  * 
  *     def __dealloc__(self):
  *         if self._nsvgrasterizer != NULL:             # <<<<<<<<<<<<<<
@@ -2965,7 +3175,7 @@ static void __pyx_pf_3svg_8__init___10Rasterizer_2__dealloc__(struct __pyx_obj_3
  */
   }
 
-  /* "svg/rasterizer.pyx":16
+  /* "svg/rasterizer.pyi":16
  *         self._nsvgrasterizer = nsvgCreateRasterizer()
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
@@ -2977,12 +3187,12 @@ static void __pyx_pf_3svg_8__init___10Rasterizer_2__dealloc__(struct __pyx_obj_3
   __Pyx_RefNannyFinishContext();
 }
 
-/* "svg/rasterizer.pyx":20
+/* "svg/rasterizer.pyi":20
  *             nsvgDeleteRasterizer(self._nsvgrasterizer)
  * 
- *     def rasterize(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0) -> bytes:             # <<<<<<<<<<<<<<
- *         """
- *         Rasterizes the SVG into a new buffer of bytes forming an RGBA image.
+ *     def rasterize(self, svg: SVG,             # <<<<<<<<<<<<<<
+ *                   width: cython.int,
+ *                   height: cython.int,
  */
 
 /* Python wrapper */
@@ -2990,19 +3200,17 @@ static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_5rasterize(PyObject *__pyx
 static char __pyx_doc_3svg_8__init___10Rasterizer_4rasterize[] = "\n        Rasterizes the SVG into a new buffer of bytes forming an RGBA image.\n        ";
 static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_5rasterize(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg = 0;
-  PyObject *__pyx_v_width = 0;
-  PyObject *__pyx_v_height = 0;
-  double __pyx_v_scale;
-  PyObject *__pyx_v_tx = 0;
-  PyObject *__pyx_v_ty = 0;
+  int __pyx_v_width;
+  int __pyx_v_height;
+  float __pyx_v_scale;
+  int __pyx_v_tx;
+  int __pyx_v_ty;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("rasterize (wrapper)", 0);
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_svg,&__pyx_n_s_width,&__pyx_n_s_height,&__pyx_n_s_scale,&__pyx_n_s_tx,&__pyx_n_s_ty,0};
     PyObject* values[6] = {0,0,0,0,0,0};
-    values[4] = ((PyObject *)__pyx_int_0);
-    values[5] = ((PyObject *)__pyx_int_0);
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -3077,15 +3285,23 @@ static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_5rasterize(PyObject *__pyx
       }
     }
     __pyx_v_svg = ((struct __pyx_obj_3svg_8__init___SVG *)values[0]);
-    __pyx_v_width = values[1];
-    __pyx_v_height = values[2];
+    __pyx_v_width = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_width == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 21, __pyx_L3_error)
+    __pyx_v_height = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_height == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 22, __pyx_L3_error)
     if (values[3]) {
-      __pyx_v_scale = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_scale == (double)-1) && PyErr_Occurred())) __PYX_ERR(3, 20, __pyx_L3_error)
+      __pyx_v_scale = __pyx_PyFloat_AsFloat(values[3]); if (unlikely((__pyx_v_scale == (float)-1) && PyErr_Occurred())) __PYX_ERR(3, 23, __pyx_L3_error)
     } else {
-      __pyx_v_scale = ((double)1.0);
+      __pyx_v_scale = ((float)1.0);
     }
-    __pyx_v_tx = values[4];
-    __pyx_v_ty = values[5];
+    if (values[4]) {
+      __pyx_v_tx = __Pyx_PyInt_As_int(values[4]); if (unlikely((__pyx_v_tx == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 24, __pyx_L3_error)
+    } else {
+      __pyx_v_tx = ((int)0);
+    }
+    if (values[5]) {
+      __pyx_v_ty = __Pyx_PyInt_As_int(values[5]); if (unlikely((__pyx_v_ty == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 25, __pyx_L3_error)
+    } else {
+      __pyx_v_ty = ((int)0);
+    }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
@@ -3107,24 +3323,19 @@ static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_5rasterize(PyObject *__pyx
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_4rasterize(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self, struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg, PyObject *__pyx_v_width, PyObject *__pyx_v_height, double __pyx_v_scale, PyObject *__pyx_v_tx, PyObject *__pyx_v_ty) {
-  PyObject *__pyx_v_length = NULL;
-  PyObject *__pyx_v_stride = NULL;
+static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_4rasterize(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self, struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg, int __pyx_v_width, int __pyx_v_height, float __pyx_v_scale, int __pyx_v_tx, int __pyx_v_ty) {
+  long __pyx_v_length;
+  long __pyx_v_stride;
   PyObject *__pyx_v_buff = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  float __pyx_t_4;
-  float __pyx_t_5;
-  unsigned char *__pyx_t_6;
-  int __pyx_t_7;
-  int __pyx_t_8;
-  int __pyx_t_9;
+  unsigned char *__pyx_t_4;
   __Pyx_RefNannySetupContext("rasterize", 0);
 
-  /* "svg/rasterizer.pyx":24
+  /* "svg/rasterizer.pyi":29
  *         Rasterizes the SVG into a new buffer of bytes forming an RGBA image.
  *         """
  *         if svg._nsvgimage == NULL:             # <<<<<<<<<<<<<<
@@ -3134,20 +3345,20 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_4rasterize(struct __pyx_ob
   __pyx_t_1 = ((__pyx_v_svg->_nsvgimage == NULL) != 0);
   if (__pyx_t_1) {
 
-    /* "svg/rasterizer.pyx":25
+    /* "svg/rasterizer.pyi":30
  *         """
  *         if svg._nsvgimage == NULL:
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')             # <<<<<<<<<<<<<<
  *         # used to calculate size of buffer
  *         length = width * height * 4
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 25, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__8, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 30, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(3, 25, __pyx_L1_error)
+    __PYX_ERR(3, 30, __pyx_L1_error)
 
-    /* "svg/rasterizer.pyx":24
+    /* "svg/rasterizer.pyi":29
  *         Rasterizes the SVG into a new buffer of bytes forming an RGBA image.
  *         """
  *         if svg._nsvgimage == NULL:             # <<<<<<<<<<<<<<
@@ -3156,100 +3367,80 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_4rasterize(struct __pyx_ob
  */
   }
 
-  /* "svg/rasterizer.pyx":27
+  /* "svg/rasterizer.pyi":32
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')
  *         # used to calculate size of buffer
  *         length = width * height * 4             # <<<<<<<<<<<<<<
  *         stride = width * 4
  *         buff = bytes(length)
  */
-  __pyx_t_2 = PyNumber_Multiply(__pyx_v_width, __pyx_v_height); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 27, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyNumber_Multiply(__pyx_t_2, __pyx_int_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 27, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_v_length = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __pyx_v_length = ((__pyx_v_width * __pyx_v_height) * 4);
 
-  /* "svg/rasterizer.pyx":28
+  /* "svg/rasterizer.pyi":33
  *         # used to calculate size of buffer
  *         length = width * height * 4
  *         stride = width * 4             # <<<<<<<<<<<<<<
  *         buff = bytes(length)
  *         nsvgRasterize(self._nsvgrasterizer,
  */
-  __pyx_t_3 = PyNumber_Multiply(__pyx_v_width, __pyx_int_4); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 28, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_v_stride = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __pyx_v_stride = (__pyx_v_width * 4);
 
-  /* "svg/rasterizer.pyx":29
+  /* "svg/rasterizer.pyi":34
  *         length = width * height * 4
  *         stride = width * 4
  *         buff = bytes(length)             # <<<<<<<<<<<<<<
  *         nsvgRasterize(self._nsvgrasterizer,
  *                       svg._nsvgimage, tx, ty, scale,
  */
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 29, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_long(__pyx_v_length); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 34, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_INCREF(__pyx_v_length);
-  __Pyx_GIVEREF(__pyx_v_length);
-  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_length);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)(&PyBytes_Type)), __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 29, __pyx_L1_error)
+  __Pyx_GIVEREF(__pyx_t_2);
+  PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)(&PyBytes_Type)), __pyx_t_3, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(3, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_v_buff = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "svg/rasterizer.pyx":31
- *         buff = bytes(length)
- *         nsvgRasterize(self._nsvgrasterizer,
- *                       svg._nsvgimage, tx, ty, scale,             # <<<<<<<<<<<<<<
- *                       buff, width, height, stride)
- *         return buff
- */
-  __pyx_t_4 = __pyx_PyFloat_AsFloat(__pyx_v_tx); if (unlikely((__pyx_t_4 == (float)-1) && PyErr_Occurred())) __PYX_ERR(3, 31, __pyx_L1_error)
-  __pyx_t_5 = __pyx_PyFloat_AsFloat(__pyx_v_ty); if (unlikely((__pyx_t_5 == (float)-1) && PyErr_Occurred())) __PYX_ERR(3, 31, __pyx_L1_error)
-
-  /* "svg/rasterizer.pyx":32
+  /* "svg/rasterizer.pyi":37
  *         nsvgRasterize(self._nsvgrasterizer,
  *                       svg._nsvgimage, tx, ty, scale,
  *                       buff, width, height, stride)             # <<<<<<<<<<<<<<
  *         return buff
  * 
  */
-  __pyx_t_6 = __Pyx_PyBytes_AsWritableUString(__pyx_v_buff); if (unlikely((!__pyx_t_6) && PyErr_Occurred())) __PYX_ERR(3, 32, __pyx_L1_error)
-  __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_v_width); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 32, __pyx_L1_error)
-  __pyx_t_8 = __Pyx_PyInt_As_int(__pyx_v_height); if (unlikely((__pyx_t_8 == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 32, __pyx_L1_error)
-  __pyx_t_9 = __Pyx_PyInt_As_int(__pyx_v_stride); if (unlikely((__pyx_t_9 == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 32, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyBytes_AsWritableUString(__pyx_v_buff); if (unlikely((!__pyx_t_4) && PyErr_Occurred())) __PYX_ERR(3, 37, __pyx_L1_error)
 
-  /* "svg/rasterizer.pyx":30
+  /* "svg/rasterizer.pyi":35
  *         stride = width * 4
  *         buff = bytes(length)
  *         nsvgRasterize(self._nsvgrasterizer,             # <<<<<<<<<<<<<<
  *                       svg._nsvgimage, tx, ty, scale,
  *                       buff, width, height, stride)
  */
-  nsvgRasterize(__pyx_v_self->_nsvgrasterizer, __pyx_v_svg->_nsvgimage, __pyx_t_4, __pyx_t_5, __pyx_v_scale, __pyx_t_6, __pyx_t_7, __pyx_t_8, __pyx_t_9);
+  nsvgRasterize(__pyx_v_self->_nsvgrasterizer, __pyx_v_svg->_nsvgimage, __pyx_v_tx, __pyx_v_ty, __pyx_v_scale, __pyx_t_4, __pyx_v_width, __pyx_v_height, __pyx_v_stride);
 
-  /* "svg/rasterizer.pyx":33
+  /* "svg/rasterizer.pyi":38
  *                       svg._nsvgimage, tx, ty, scale,
  *                       buff, width, height, stride)
  *         return buff             # <<<<<<<<<<<<<<
  * 
- *     def rasterize_to_buffer(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0, stride: int = 0, buffer = None):
+ *     def rasterize_to_buffer(self, svg: SVG,
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF(__pyx_v_buff);
   __pyx_r = __pyx_v_buff;
   goto __pyx_L0;
 
-  /* "svg/rasterizer.pyx":20
+  /* "svg/rasterizer.pyi":20
  *             nsvgDeleteRasterizer(self._nsvgrasterizer)
  * 
- *     def rasterize(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0) -> bytes:             # <<<<<<<<<<<<<<
- *         """
- *         Rasterizes the SVG into a new buffer of bytes forming an RGBA image.
+ *     def rasterize(self, svg: SVG,             # <<<<<<<<<<<<<<
+ *                   width: cython.int,
+ *                   height: cython.int,
  */
 
   /* function exit code */
@@ -3259,44 +3450,38 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_4rasterize(struct __pyx_ob
   __Pyx_AddTraceback("svg.__init__.Rasterizer.rasterize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_length);
-  __Pyx_XDECREF(__pyx_v_stride);
   __Pyx_XDECREF(__pyx_v_buff);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "svg/rasterizer.pyx":35
+/* "svg/rasterizer.pyi":40
  *         return buff
  * 
- *     def rasterize_to_buffer(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0, stride: int = 0, buffer = None):             # <<<<<<<<<<<<<<
- *         """
- *         Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually w * 4.
+ *     def rasterize_to_buffer(self, svg: SVG,             # <<<<<<<<<<<<<<
+ *                             width: cython.int,
+ *                             height: cython.int,
  */
 
 /* Python wrapper */
 static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_7rasterize_to_buffer(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_3svg_8__init___10Rasterizer_6rasterize_to_buffer[] = "\n        Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually w * 4.\n        ";
+static char __pyx_doc_3svg_8__init___10Rasterizer_6rasterize_to_buffer[] = "\n        Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually width * 4.\n        ";
 static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_7rasterize_to_buffer(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg = 0;
-  PyObject *__pyx_v_width = 0;
-  PyObject *__pyx_v_height = 0;
-  double __pyx_v_scale;
-  PyObject *__pyx_v_tx = 0;
-  PyObject *__pyx_v_ty = 0;
-  PyObject *__pyx_v_stride = 0;
+  int __pyx_v_width;
+  int __pyx_v_height;
+  int __pyx_v_stride;
   PyObject *__pyx_v_buffer = 0;
+  float __pyx_v_scale;
+  int __pyx_v_tx;
+  int __pyx_v_ty;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("rasterize_to_buffer (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_svg,&__pyx_n_s_width,&__pyx_n_s_height,&__pyx_n_s_scale,&__pyx_n_s_tx,&__pyx_n_s_ty,&__pyx_n_s_stride,&__pyx_n_s_buffer,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_svg,&__pyx_n_s_width,&__pyx_n_s_height,&__pyx_n_s_stride,&__pyx_n_s_buffer,&__pyx_n_s_scale,&__pyx_n_s_tx,&__pyx_n_s_ty,0};
     PyObject* values[8] = {0,0,0,0,0,0,0,0};
-    values[4] = ((PyObject *)__pyx_int_0);
-    values[5] = ((PyObject *)__pyx_int_0);
-    values[6] = ((PyObject *)__pyx_int_0);
-    values[7] = ((PyObject *)Py_None);
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -3329,47 +3514,47 @@ static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_7rasterize_to_buffer(PyObj
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_width)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rasterize_to_buffer", 0, 3, 8, 1); __PYX_ERR(3, 35, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("rasterize_to_buffer", 0, 5, 8, 1); __PYX_ERR(3, 40, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_height)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("rasterize_to_buffer", 0, 3, 8, 2); __PYX_ERR(3, 35, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("rasterize_to_buffer", 0, 5, 8, 2); __PYX_ERR(3, 40, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_scale);
-          if (value) { values[3] = value; kw_args--; }
+        if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_stride)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("rasterize_to_buffer", 0, 5, 8, 3); __PYX_ERR(3, 40, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
-        if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_tx);
-          if (value) { values[4] = value; kw_args--; }
+        if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_buffer)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("rasterize_to_buffer", 0, 5, 8, 4); __PYX_ERR(3, 40, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_ty);
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_scale);
           if (value) { values[5] = value; kw_args--; }
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_stride);
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_tx);
           if (value) { values[6] = value; kw_args--; }
         }
         CYTHON_FALLTHROUGH;
         case  7:
         if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_buffer);
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_ty);
           if (value) { values[7] = value; kw_args--; }
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rasterize_to_buffer") < 0)) __PYX_ERR(3, 35, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "rasterize_to_buffer") < 0)) __PYX_ERR(3, 40, __pyx_L3_error)
       }
     } else {
       switch (PyTuple_GET_SIZE(__pyx_args)) {
@@ -3380,10 +3565,8 @@ static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_7rasterize_to_buffer(PyObj
         case  6: values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
         CYTHON_FALLTHROUGH;
         case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
-        CYTHON_FALLTHROUGH;
-        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
-        CYTHON_FALLTHROUGH;
-        case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+        values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
         values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
         break;
@@ -3391,28 +3574,37 @@ static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_7rasterize_to_buffer(PyObj
       }
     }
     __pyx_v_svg = ((struct __pyx_obj_3svg_8__init___SVG *)values[0]);
-    __pyx_v_width = values[1];
-    __pyx_v_height = values[2];
-    if (values[3]) {
-      __pyx_v_scale = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_scale == (double)-1) && PyErr_Occurred())) __PYX_ERR(3, 35, __pyx_L3_error)
+    __pyx_v_width = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_width == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 41, __pyx_L3_error)
+    __pyx_v_height = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_height == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 42, __pyx_L3_error)
+    __pyx_v_stride = __Pyx_PyInt_As_int(values[3]); if (unlikely((__pyx_v_stride == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 43, __pyx_L3_error)
+    __pyx_v_buffer = ((PyObject*)values[4]);
+    if (values[5]) {
+      __pyx_v_scale = __pyx_PyFloat_AsFloat(values[5]); if (unlikely((__pyx_v_scale == (float)-1) && PyErr_Occurred())) __PYX_ERR(3, 45, __pyx_L3_error)
     } else {
-      __pyx_v_scale = ((double)1.0);
+      __pyx_v_scale = ((float)1.0);
     }
-    __pyx_v_tx = values[4];
-    __pyx_v_ty = values[5];
-    __pyx_v_stride = values[6];
-    __pyx_v_buffer = values[7];
+    if (values[6]) {
+      __pyx_v_tx = __Pyx_PyInt_As_int(values[6]); if (unlikely((__pyx_v_tx == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 46, __pyx_L3_error)
+    } else {
+      __pyx_v_tx = ((int)0);
+    }
+    if (values[7]) {
+      __pyx_v_ty = __Pyx_PyInt_As_int(values[7]); if (unlikely((__pyx_v_ty == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 47, __pyx_L3_error)
+    } else {
+      __pyx_v_ty = ((int)0);
+    }
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("rasterize_to_buffer", 0, 3, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(3, 35, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("rasterize_to_buffer", 0, 5, 8, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(3, 40, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("svg.__init__.Rasterizer.rasterize_to_buffer", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_svg), __pyx_ptype_3svg_8__init___SVG, 1, "svg", 0))) __PYX_ERR(3, 35, __pyx_L1_error)
-  __pyx_r = __pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(((struct __pyx_obj_3svg_8__init___Rasterizer *)__pyx_v_self), __pyx_v_svg, __pyx_v_width, __pyx_v_height, __pyx_v_scale, __pyx_v_tx, __pyx_v_ty, __pyx_v_stride, __pyx_v_buffer);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_svg), __pyx_ptype_3svg_8__init___SVG, 1, "svg", 0))) __PYX_ERR(3, 40, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_buffer), (&PyBytes_Type), 1, "buffer", 1))) __PYX_ERR(3, 44, __pyx_L1_error)
+  __pyx_r = __pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(((struct __pyx_obj_3svg_8__init___Rasterizer *)__pyx_v_self), __pyx_v_svg, __pyx_v_width, __pyx_v_height, __pyx_v_stride, __pyx_v_buffer, __pyx_v_scale, __pyx_v_tx, __pyx_v_ty);
 
   /* function exit code */
   goto __pyx_L0;
@@ -3423,7 +3615,7 @@ static PyObject *__pyx_pw_3svg_8__init___10Rasterizer_7rasterize_to_buffer(PyObj
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self, struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg, PyObject *__pyx_v_width, PyObject *__pyx_v_height, double __pyx_v_scale, PyObject *__pyx_v_tx, PyObject *__pyx_v_ty, PyObject *__pyx_v_stride, PyObject *__pyx_v_buffer) {
+static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(struct __pyx_obj_3svg_8__init___Rasterizer *__pyx_v_self, struct __pyx_obj_3svg_8__init___SVG *__pyx_v_svg, int __pyx_v_width, int __pyx_v_height, int __pyx_v_stride, PyObject *__pyx_v_buffer, float __pyx_v_scale, int __pyx_v_tx, int __pyx_v_ty) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -3432,33 +3624,28 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(struc
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
-  float __pyx_t_7;
-  float __pyx_t_8;
-  unsigned char *__pyx_t_9;
-  int __pyx_t_10;
-  int __pyx_t_11;
-  int __pyx_t_12;
+  unsigned char *__pyx_t_7;
   __Pyx_RefNannySetupContext("rasterize_to_buffer", 0);
 
-  /* "svg/rasterizer.pyx":39
- *         Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually w * 4.
+  /* "svg/rasterizer.pyi":52
+ *         Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually width * 4.
  *         """
  *         if not isinstance(buffer, bytes):             # <<<<<<<<<<<<<<
  *             raise TypeError("`buffer` must be bytes, found {}".format(type(buffer)))
- *         if stride == 0:
+ *         if stride <= 0:
  */
   __pyx_t_1 = PyBytes_Check(__pyx_v_buffer); 
   __pyx_t_2 = ((!(__pyx_t_1 != 0)) != 0);
   if (__pyx_t_2) {
 
-    /* "svg/rasterizer.pyx":40
+    /* "svg/rasterizer.pyi":53
  *         """
  *         if not isinstance(buffer, bytes):
  *             raise TypeError("`buffer` must be bytes, found {}".format(type(buffer)))             # <<<<<<<<<<<<<<
- *         if stride == 0:
- *             raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')
+ *         if stride <= 0:
+ *             raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_buffer_must_be_bytes_found, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 40, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_buffer_must_be_bytes_found, __pyx_n_s_format); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 53, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_5 = NULL;
     if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_4))) {
@@ -3471,13 +3658,13 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(struc
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, ((PyObject *)Py_TYPE(__pyx_v_buffer))); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 40, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, ((PyObject *)Py_TYPE(__pyx_v_buffer))); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 53, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
     } else {
       #if CYTHON_FAST_PYCALL
       if (PyFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[2] = {__pyx_t_5, ((PyObject *)Py_TYPE(__pyx_v_buffer))};
-        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 40, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 53, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
@@ -3485,83 +3672,80 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(struc
       #if CYTHON_FAST_PYCCALL
       if (__Pyx_PyFastCFunction_Check(__pyx_t_4)) {
         PyObject *__pyx_temp[2] = {__pyx_t_5, ((PyObject *)Py_TYPE(__pyx_v_buffer))};
-        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 40, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyCFunction_FastCall(__pyx_t_4, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 53, __pyx_L1_error)
         __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else
       #endif
       {
-        __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 40, __pyx_L1_error)
+        __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(3, 53, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
         __Pyx_INCREF(((PyObject *)Py_TYPE(__pyx_v_buffer)));
         __Pyx_GIVEREF(((PyObject *)Py_TYPE(__pyx_v_buffer)));
         PyTuple_SET_ITEM(__pyx_t_6, 0+1, ((PyObject *)Py_TYPE(__pyx_v_buffer)));
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 40, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 53, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       }
     }
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 40, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(3, 53, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_GIVEREF(__pyx_t_3);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3);
     __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 40, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 53, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(3, 40, __pyx_L1_error)
+    __PYX_ERR(3, 53, __pyx_L1_error)
 
-    /* "svg/rasterizer.pyx":39
- *         Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually w * 4.
+    /* "svg/rasterizer.pyi":52
+ *         Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually width * 4.
  *         """
  *         if not isinstance(buffer, bytes):             # <<<<<<<<<<<<<<
  *             raise TypeError("`buffer` must be bytes, found {}".format(type(buffer)))
- *         if stride == 0:
+ *         if stride <= 0:
  */
   }
 
-  /* "svg/rasterizer.pyx":41
+  /* "svg/rasterizer.pyi":54
  *         if not isinstance(buffer, bytes):
  *             raise TypeError("`buffer` must be bytes, found {}".format(type(buffer)))
- *         if stride == 0:             # <<<<<<<<<<<<<<
- *             raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')
+ *         if stride <= 0:             # <<<<<<<<<<<<<<
+ *             raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')
  *         if svg._nsvgimage == NULL:
  */
-  __pyx_t_3 = __Pyx_PyInt_EqObjC(__pyx_v_stride, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 41, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_2 < 0)) __PYX_ERR(3, 41, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_2 = ((__pyx_v_stride <= 0) != 0);
   if (__pyx_t_2) {
 
-    /* "svg/rasterizer.pyx":42
+    /* "svg/rasterizer.pyi":55
  *             raise TypeError("`buffer` must be bytes, found {}".format(type(buffer)))
- *         if stride == 0:
- *             raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')             # <<<<<<<<<<<<<<
+ *         if stride <= 0:
+ *             raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')             # <<<<<<<<<<<<<<
  *         if svg._nsvgimage == NULL:
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 42, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__9, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 55, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(3, 42, __pyx_L1_error)
+    __PYX_ERR(3, 55, __pyx_L1_error)
 
-    /* "svg/rasterizer.pyx":41
+    /* "svg/rasterizer.pyi":54
  *         if not isinstance(buffer, bytes):
  *             raise TypeError("`buffer` must be bytes, found {}".format(type(buffer)))
- *         if stride == 0:             # <<<<<<<<<<<<<<
- *             raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')
+ *         if stride <= 0:             # <<<<<<<<<<<<<<
+ *             raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')
  *         if svg._nsvgimage == NULL:
  */
   }
 
-  /* "svg/rasterizer.pyx":43
- *         if stride == 0:
- *             raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')
+  /* "svg/rasterizer.pyi":56
+ *         if stride <= 0:
+ *             raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')
  *         if svg._nsvgimage == NULL:             # <<<<<<<<<<<<<<
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')
  *         nsvgRasterize(self._nsvgrasterizer,
@@ -3569,59 +3753,50 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(struc
   __pyx_t_2 = ((__pyx_v_svg->_nsvgimage == NULL) != 0);
   if (__pyx_t_2) {
 
-    /* "svg/rasterizer.pyx":44
- *             raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')
+    /* "svg/rasterizer.pyi":57
+ *             raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')
  *         if svg._nsvgimage == NULL:
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')             # <<<<<<<<<<<<<<
  *         nsvgRasterize(self._nsvgrasterizer,
  *                       svg._nsvgimage, tx, ty, scale,
  */
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 44, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__10, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(3, 57, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_Raise(__pyx_t_3, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __PYX_ERR(3, 44, __pyx_L1_error)
+    __PYX_ERR(3, 57, __pyx_L1_error)
 
-    /* "svg/rasterizer.pyx":43
- *         if stride == 0:
- *             raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')
+    /* "svg/rasterizer.pyi":56
+ *         if stride <= 0:
+ *             raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')
  *         if svg._nsvgimage == NULL:             # <<<<<<<<<<<<<<
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')
  *         nsvgRasterize(self._nsvgrasterizer,
  */
   }
 
-  /* "svg/rasterizer.pyx":46
- *             raise ValueError('The given SVG is empty, you must parse the SVG first.')
- *         nsvgRasterize(self._nsvgrasterizer,
- *                       svg._nsvgimage, tx, ty, scale,             # <<<<<<<<<<<<<<
- *                       buffer, width, height, stride)
- *         return buffer
- */
-  __pyx_t_7 = __pyx_PyFloat_AsFloat(__pyx_v_tx); if (unlikely((__pyx_t_7 == (float)-1) && PyErr_Occurred())) __PYX_ERR(3, 46, __pyx_L1_error)
-  __pyx_t_8 = __pyx_PyFloat_AsFloat(__pyx_v_ty); if (unlikely((__pyx_t_8 == (float)-1) && PyErr_Occurred())) __PYX_ERR(3, 46, __pyx_L1_error)
-
-  /* "svg/rasterizer.pyx":47
+  /* "svg/rasterizer.pyi":60
  *         nsvgRasterize(self._nsvgrasterizer,
  *                       svg._nsvgimage, tx, ty, scale,
  *                       buffer, width, height, stride)             # <<<<<<<<<<<<<<
  *         return buffer
  */
-  __pyx_t_9 = __Pyx_PyObject_AsWritableUString(__pyx_v_buffer); if (unlikely((!__pyx_t_9) && PyErr_Occurred())) __PYX_ERR(3, 47, __pyx_L1_error)
-  __pyx_t_10 = __Pyx_PyInt_As_int(__pyx_v_width); if (unlikely((__pyx_t_10 == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 47, __pyx_L1_error)
-  __pyx_t_11 = __Pyx_PyInt_As_int(__pyx_v_height); if (unlikely((__pyx_t_11 == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 47, __pyx_L1_error)
-  __pyx_t_12 = __Pyx_PyInt_As_int(__pyx_v_stride); if (unlikely((__pyx_t_12 == (int)-1) && PyErr_Occurred())) __PYX_ERR(3, 47, __pyx_L1_error)
+  if (unlikely(__pyx_v_buffer == Py_None)) {
+    PyErr_SetString(PyExc_TypeError, "expected bytes, NoneType found");
+    __PYX_ERR(3, 60, __pyx_L1_error)
+  }
+  __pyx_t_7 = __Pyx_PyBytes_AsWritableUString(__pyx_v_buffer); if (unlikely((!__pyx_t_7) && PyErr_Occurred())) __PYX_ERR(3, 60, __pyx_L1_error)
 
-  /* "svg/rasterizer.pyx":45
+  /* "svg/rasterizer.pyi":58
  *         if svg._nsvgimage == NULL:
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')
  *         nsvgRasterize(self._nsvgrasterizer,             # <<<<<<<<<<<<<<
  *                       svg._nsvgimage, tx, ty, scale,
  *                       buffer, width, height, stride)
  */
-  nsvgRasterize(__pyx_v_self->_nsvgrasterizer, __pyx_v_svg->_nsvgimage, __pyx_t_7, __pyx_t_8, __pyx_v_scale, __pyx_t_9, __pyx_t_10, __pyx_t_11, __pyx_t_12);
+  nsvgRasterize(__pyx_v_self->_nsvgrasterizer, __pyx_v_svg->_nsvgimage, __pyx_v_tx, __pyx_v_ty, __pyx_v_scale, __pyx_t_7, __pyx_v_width, __pyx_v_height, __pyx_v_stride);
 
-  /* "svg/rasterizer.pyx":48
+  /* "svg/rasterizer.pyi":61
  *                       svg._nsvgimage, tx, ty, scale,
  *                       buffer, width, height, stride)
  *         return buffer             # <<<<<<<<<<<<<<
@@ -3631,12 +3806,12 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_6rasterize_to_buffer(struc
   __pyx_r = __pyx_v_buffer;
   goto __pyx_L0;
 
-  /* "svg/rasterizer.pyx":35
+  /* "svg/rasterizer.pyi":40
  *         return buff
  * 
- *     def rasterize_to_buffer(self, svg: SVG, width: int, height: int, scale: float = 1.0, tx: int = 0, ty: int = 0, stride: int = 0, buffer = None):             # <<<<<<<<<<<<<<
- *         """
- *         Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually w * 4.
+ *     def rasterize_to_buffer(self, svg: SVG,             # <<<<<<<<<<<<<<
+ *                             width: cython.int,
+ *                             height: cython.int,
  */
 
   /* function exit code */
@@ -3684,7 +3859,7 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_8__reduce_cython__(CYTHON_
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 2, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 2, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -3737,7 +3912,7 @@ static PyObject *__pyx_pf_3svg_8__init___10Rasterizer_10__setstate_cython__(CYTH
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 4, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_TypeError, __pyx_tuple__12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 4, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_Raise(__pyx_t_1, 0, 0, 0);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4561,35 +4736,44 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_The_given_SVG_is_empty_you_must, __pyx_k_The_given_SVG_is_empty_you_must, sizeof(__pyx_k_The_given_SVG_is_empty_you_must), 0, 0, 1, 0},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_kp_s_UTF_8, __pyx_k_UTF_8, sizeof(__pyx_k_UTF_8), 0, 0, 1, 0},
+  {&__pyx_n_s_VALID_DPI_UNITS, __pyx_k_VALID_DPI_UNITS, sizeof(__pyx_k_VALID_DPI_UNITS), 0, 0, 1, 1},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_kp_s_You_must_set_a_stride_to_rasteri, __pyx_k_You_must_set_a_stride_to_rasteri, sizeof(__pyx_k_You_must_set_a_stride_to_rasteri), 0, 0, 1, 0},
   {&__pyx_n_s_buffer, __pyx_k_buffer, sizeof(__pyx_k_buffer), 0, 0, 1, 1},
   {&__pyx_kp_s_buffer_must_be_bytes_found, __pyx_k_buffer_must_be_bytes_found, sizeof(__pyx_k_buffer_must_be_bytes_found), 0, 0, 1, 0},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+  {&__pyx_n_s_cm, __pyx_k_cm, sizeof(__pyx_k_cm), 0, 0, 1, 1},
   {&__pyx_n_s_dict, __pyx_k_dict, sizeof(__pyx_k_dict), 0, 0, 1, 1},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
   {&__pyx_n_s_dpi, __pyx_k_dpi, sizeof(__pyx_k_dpi), 0, 0, 1, 1},
   {&__pyx_n_s_dpi_2, __pyx_k_dpi_2, sizeof(__pyx_k_dpi_2), 0, 0, 1, 1},
   {&__pyx_n_s_dpi_conv, __pyx_k_dpi_conv, sizeof(__pyx_k_dpi_conv), 0, 0, 1, 1},
+  {&__pyx_kp_s_dpi_needs_to_be_one_of_got, __pyx_k_dpi_needs_to_be_one_of_got, sizeof(__pyx_k_dpi_needs_to_be_one_of_got), 0, 0, 1, 0},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
   {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_filename, __pyx_k_filename, sizeof(__pyx_k_filename), 0, 0, 1, 1},
   {&__pyx_n_s_format, __pyx_k_format, sizeof(__pyx_k_format), 0, 0, 1, 1},
+  {&__pyx_n_s_getfilesystemencoding, __pyx_k_getfilesystemencoding, sizeof(__pyx_k_getfilesystemencoding), 0, 0, 1, 1},
   {&__pyx_n_s_getstate, __pyx_k_getstate, sizeof(__pyx_k_getstate), 0, 0, 1, 1},
   {&__pyx_n_s_height, __pyx_k_height, sizeof(__pyx_k_height), 0, 0, 1, 1},
   {&__pyx_n_s_im, __pyx_k_im, sizeof(__pyx_k_im), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
+  {&__pyx_n_s_in, __pyx_k_in, sizeof(__pyx_k_in), 0, 0, 1, 1},
   {&__pyx_n_s_magnitude, __pyx_k_magnitude, sizeof(__pyx_k_magnitude), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
   {&__pyx_n_s_metaclass, __pyx_k_metaclass, sizeof(__pyx_k_metaclass), 0, 0, 1, 1},
+  {&__pyx_n_s_mm, __pyx_k_mm, sizeof(__pyx_k_mm), 0, 0, 1, 1},
   {&__pyx_n_s_module, __pyx_k_module, sizeof(__pyx_k_module), 0, 0, 1, 1},
   {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
   {&__pyx_n_s_new, __pyx_k_new, sizeof(__pyx_k_new), 0, 0, 1, 1},
   {&__pyx_kp_s_no_default___reduce___due_to_non, __pyx_k_no_default___reduce___due_to_non, sizeof(__pyx_k_no_default___reduce___due_to_non), 0, 0, 1, 0},
   {&__pyx_n_s_parse, __pyx_k_parse, sizeof(__pyx_k_parse), 0, 0, 1, 1},
   {&__pyx_n_s_parse_file, __pyx_k_parse_file, sizeof(__pyx_k_parse_file), 0, 0, 1, 1},
+  {&__pyx_n_s_pc, __pyx_k_pc, sizeof(__pyx_k_pc), 0, 0, 1, 1},
   {&__pyx_n_s_pickle, __pyx_k_pickle, sizeof(__pyx_k_pickle), 0, 0, 1, 1},
   {&__pyx_n_s_prepare, __pyx_k_prepare, sizeof(__pyx_k_prepare), 0, 0, 1, 1},
+  {&__pyx_n_s_pt, __pyx_k_pt, sizeof(__pyx_k_pt), 0, 0, 1, 1},
+  {&__pyx_n_s_px, __pyx_k_px, sizeof(__pyx_k_px), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_PickleError, __pyx_k_pyx_PickleError, sizeof(__pyx_k_pyx_PickleError), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_checksum, __pyx_k_pyx_checksum, sizeof(__pyx_k_pyx_checksum), 0, 0, 1, 1},
   {&__pyx_n_s_pyx_result, __pyx_k_pyx_result, sizeof(__pyx_k_pyx_result), 0, 0, 1, 1},
@@ -4609,7 +4793,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_svg, __pyx_k_svg, sizeof(__pyx_k_svg), 0, 0, 1, 1},
   {&__pyx_n_u_svg, __pyx_k_svg, sizeof(__pyx_k_svg), 0, 1, 0, 1},
   {&__pyx_n_s_svg___init, __pyx_k_svg___init, sizeof(__pyx_k_svg___init), 0, 0, 1, 1},
-  {&__pyx_kp_s_svg_parser_pyx, __pyx_k_svg_parser_pyx, sizeof(__pyx_k_svg_parser_pyx), 0, 0, 1, 0},
+  {&__pyx_kp_s_svg_parser_pyi, __pyx_k_svg_parser_pyi, sizeof(__pyx_k_svg_parser_pyi), 0, 0, 1, 0},
+  {&__pyx_n_s_sys, __pyx_k_sys, sizeof(__pyx_k_sys), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_tx, __pyx_k_tx, sizeof(__pyx_k_tx), 0, 0, 1, 1},
   {&__pyx_n_s_ty, __pyx_k_ty, sizeof(__pyx_k_ty), 0, 0, 1, 1},
@@ -4619,7 +4804,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_builtin_staticmethod = __Pyx_GetBuiltinName(__pyx_n_s_staticmethod); if (!__pyx_builtin_staticmethod) __PYX_ERR(0, 23, __pyx_L1_error)
   __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(1, 16, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(2, 2, __pyx_L1_error)
   return 0;
@@ -4631,7 +4816,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "svg/svg.pyx":16
+  /* "svg/svg.pyi":16
  *         """Returns the width of the svg image."""
  *         if self._nsvgimage == NULL:
  *             raise ValueError("SVG has not been parsed yet.")             # <<<<<<<<<<<<<<
@@ -4642,7 +4827,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple_);
   __Pyx_GIVEREF(__pyx_tuple_);
 
-  /* "svg/svg.pyx":23
+  /* "svg/svg.pyi":23
  *         """Returns the height of the svg image."""
  *         if self._nsvgimage == NULL:
  *             raise ValueError("SVG has not been parsed yet.")             # <<<<<<<<<<<<<<
@@ -4671,82 +4856,71 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "svg/parser.pyx":9
- * 
- * def _dpi_conv(dpi: str):
+  /* "svg/parser.pyi":13
+ *     if dpi[-2:] not in VALID_DPI_UNITS:
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))
  *     units = dpi[-2:].encode('UTF-8')             # <<<<<<<<<<<<<<
  *     _dpi = float(dpi[:-2])
  *     return units, _dpi
  */
-  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_UTF_8); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_tuple__5 = PyTuple_Pack(1, __pyx_kp_s_UTF_8); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__5);
   __Pyx_GIVEREF(__pyx_tuple__5);
 
-  /* "svg/parser.pyx":27
+  /* "svg/parser.pyi":31
  *         units, magnitude = _dpi_conv(dpi)
  *         im = SVG()
  *         im._nsvgimage = nsvgParse(svg.encode('UTF-8'), units, magnitude)             # <<<<<<<<<<<<<<
  *         if im._nsvgimage == NULL:
  *             raise SVGParserError("Could not parse SVG from string.")
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_UTF_8); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 27, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s_UTF_8); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "svg/parser.pyx":29
+  /* "svg/parser.pyi":33
  *         im._nsvgimage = nsvgParse(svg.encode('UTF-8'), units, magnitude)
  *         if im._nsvgimage == NULL:
  *             raise SVGParserError("Could not parse SVG from string.")             # <<<<<<<<<<<<<<
  *         else:
  *             return im
  */
-  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_Could_not_parse_SVG_from_string); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(1, __pyx_kp_s_Could_not_parse_SVG_from_string); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "svg/parser.pyx":39
- *         'pc' 'mm', 'cm', or 'in'.
- *         """
- *         file = filename.encode('UTF-8')             # <<<<<<<<<<<<<<
- *         units, magnitude = _dpi_conv(dpi)
- *         im = SVG()
- */
-  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_UTF_8); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 39, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__8);
-  __Pyx_GIVEREF(__pyx_tuple__8);
-
-  /* "svg/rasterizer.pyx":25
+  /* "svg/rasterizer.pyi":30
  *         """
  *         if svg._nsvgimage == NULL:
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')             # <<<<<<<<<<<<<<
  *         # used to calculate size of buffer
  *         length = width * height * 4
  */
-  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_The_given_SVG_is_empty_you_must); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(3, 25, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__9);
-  __Pyx_GIVEREF(__pyx_tuple__9);
+  __pyx_tuple__8 = PyTuple_Pack(1, __pyx_kp_s_The_given_SVG_is_empty_you_must); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(3, 30, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
 
-  /* "svg/rasterizer.pyx":42
+  /* "svg/rasterizer.pyi":55
  *             raise TypeError("`buffer` must be bytes, found {}".format(type(buffer)))
- *         if stride == 0:
- *             raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')             # <<<<<<<<<<<<<<
+ *         if stride <= 0:
+ *             raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')             # <<<<<<<<<<<<<<
  *         if svg._nsvgimage == NULL:
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')
  */
-  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_You_must_set_a_stride_to_rasteri); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(3, 42, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__10);
-  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_tuple__9 = PyTuple_Pack(1, __pyx_kp_s_You_must_set_a_stride_to_rasteri); if (unlikely(!__pyx_tuple__9)) __PYX_ERR(3, 55, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__9);
+  __Pyx_GIVEREF(__pyx_tuple__9);
 
-  /* "svg/rasterizer.pyx":44
- *             raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')
+  /* "svg/rasterizer.pyi":57
+ *             raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')
  *         if svg._nsvgimage == NULL:
  *             raise ValueError('The given SVG is empty, you must parse the SVG first.')             # <<<<<<<<<<<<<<
  *         nsvgRasterize(self._nsvgrasterizer,
  *                       svg._nsvgimage, tx, ty, scale,
  */
-  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_s_The_given_SVG_is_empty_you_must); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(3, 44, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
+  __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_The_given_SVG_is_empty_you_must); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(3, 57, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
 
   /* "(tree fragment)":2
  * def __reduce_cython__(self):
@@ -4754,54 +4928,65 @@ static int __Pyx_InitCachedConstants(void) {
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  */
-  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(2, 2, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__12);
-  __Pyx_GIVEREF(__pyx_tuple__12);
+  __pyx_tuple__11 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(2, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__11);
+  __Pyx_GIVEREF(__pyx_tuple__11);
 
   /* "(tree fragment)":4
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")
  * def __setstate_cython__(self, __pyx_state):
  *     raise TypeError("no default __reduce__ due to non-trivial __cinit__")             # <<<<<<<<<<<<<<
  */
-  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(2, 4, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_no_default___reduce___due_to_non); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(2, 4, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__12);
+  __Pyx_GIVEREF(__pyx_tuple__12);
+
+  /* "svg/parser.pyi":8
+ * 
+ * 
+ * VALID_DPI_UNITS = ('px', 'pt', 'pc', 'mm', 'cm', 'in')             # <<<<<<<<<<<<<<
+ * 
+ * def _dpi_conv(dpi: str):
+ */
+  __pyx_tuple__13 = PyTuple_Pack(6, __pyx_n_s_px, __pyx_n_s_pt, __pyx_n_s_pc, __pyx_n_s_mm, __pyx_n_s_cm, __pyx_n_s_in); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__13);
   __Pyx_GIVEREF(__pyx_tuple__13);
 
-  /* "svg/parser.pyx":8
- * 
+  /* "svg/parser.pyi":10
+ * VALID_DPI_UNITS = ('px', 'pt', 'pc', 'mm', 'cm', 'in')
  * 
  * def _dpi_conv(dpi: str):             # <<<<<<<<<<<<<<
- *     units = dpi[-2:].encode('UTF-8')
- *     _dpi = float(dpi[:-2])
+ *     if dpi[-2:] not in VALID_DPI_UNITS:
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))
  */
-  __pyx_tuple__14 = PyTuple_Pack(3, __pyx_n_s_dpi, __pyx_n_s_units, __pyx_n_s_dpi_2); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(3, __pyx_n_s_dpi, __pyx_n_s_units, __pyx_n_s_dpi_2); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_svg_parser_pyx, __pyx_n_s_dpi_conv, 8, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_svg_parser_pyi, __pyx_n_s_dpi_conv, 10, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 10, __pyx_L1_error)
 
-  /* "svg/parser.pyx":20
+  /* "svg/parser.pyi":24
  * 
  *     @staticmethod
  *     def parse(svg: str, dpi: str = '96px') -> SVG:             # <<<<<<<<<<<<<<
  *         """
  *         Creates an SVG image from an SVG string. Units for dpi are 'px', 'pt',
  */
-  __pyx_tuple__16 = PyTuple_Pack(5, __pyx_n_s_svg, __pyx_n_s_dpi, __pyx_n_s_units, __pyx_n_s_magnitude, __pyx_n_s_im); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_tuple__16 = PyTuple_Pack(5, __pyx_n_s_svg, __pyx_n_s_dpi, __pyx_n_s_units, __pyx_n_s_magnitude, __pyx_n_s_im); if (unlikely(!__pyx_tuple__16)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__16);
   __Pyx_GIVEREF(__pyx_tuple__16);
-  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_svg_parser_pyx, __pyx_n_s_parse, 20, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_codeobj__17 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__16, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_svg_parser_pyi, __pyx_n_s_parse, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__17)) __PYX_ERR(0, 24, __pyx_L1_error)
 
-  /* "svg/parser.pyx":34
+  /* "svg/parser.pyi":38
  * 
  *     @staticmethod
  *     def parse_file(filename: str, dpi: str = '96px') -> SVG:             # <<<<<<<<<<<<<<
  *         """
  *         Creates an SVG image from filename. Units for dpi are 'px', 'pt',
  */
-  __pyx_tuple__18 = PyTuple_Pack(6, __pyx_n_s_filename, __pyx_n_s_dpi, __pyx_n_s_file, __pyx_n_s_units, __pyx_n_s_magnitude, __pyx_n_s_im); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_tuple__18 = PyTuple_Pack(6, __pyx_n_s_filename, __pyx_n_s_dpi, __pyx_n_s_file, __pyx_n_s_units, __pyx_n_s_magnitude, __pyx_n_s_im); if (unlikely(!__pyx_tuple__18)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__18);
   __Pyx_GIVEREF(__pyx_tuple__18);
-  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_svg_parser_pyx, __pyx_n_s_parse_file, 34, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_codeobj__19 = (PyObject*)__Pyx_PyCode_New(2, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__18, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_svg_parser_pyi, __pyx_n_s_parse_file, 38, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__19)) __PYX_ERR(0, 38, __pyx_L1_error)
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_Parser(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
@@ -4821,8 +5006,6 @@ static int __Pyx_InitCachedConstants(void) {
 
 static int __Pyx_InitGlobals(void) {
   if (__Pyx_InitStrings(__pyx_string_tab) < 0) __PYX_ERR(4, 1, __pyx_L1_error);
-  __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(4, 1, __pyx_L1_error)
-  __pyx_int_4 = PyInt_FromLong(4); if (unlikely(!__pyx_int_4)) __PYX_ERR(4, 1, __pyx_L1_error)
   __pyx_int_222419149 = PyInt_FromLong(222419149L); if (unlikely(!__pyx_int_222419149)) __PYX_ERR(4, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -4977,10 +5160,10 @@ static int __pyx_pymod_exec_svg(PyObject *__pyx_pyinit_module)
   if (PyObject_SetAttrString(__pyx_m, "SVG", (PyObject *)&__pyx_type_3svg_8__init___SVG) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_3svg_8__init___SVG) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __pyx_ptype_3svg_8__init___SVG = &__pyx_type_3svg_8__init___SVG;
-  if (PyType_Ready(&__pyx_type_3svg_8__init___Parser) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_3svg_8__init___Parser) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   __pyx_type_3svg_8__init___Parser.tp_print = 0;
-  if (PyObject_SetAttrString(__pyx_m, "Parser", (PyObject *)&__pyx_type_3svg_8__init___Parser) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_3svg_8__init___Parser) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
+  if (PyObject_SetAttrString(__pyx_m, "Parser", (PyObject *)&__pyx_type_3svg_8__init___Parser) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_3svg_8__init___Parser) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   __pyx_ptype_3svg_8__init___Parser = &__pyx_type_3svg_8__init___Parser;
   if (PyType_Ready(&__pyx_type_3svg_8__init___Rasterizer) < 0) __PYX_ERR(3, 9, __pyx_L1_error)
   __pyx_type_3svg_8__init___Rasterizer.tp_print = 0;
@@ -4995,8 +5178,19 @@ static int __pyx_pymod_exec_svg(PyObject *__pyx_pyinit_module)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(4, 1, __pyx_L1_error)
   #endif
 
-  /* "svg/parser.pyx":4
+  /* "svg/parser.pyi":2
+ * from nanosvg cimport (NSVGimage, nsvgParse, nsvgParseFromFile)
+ * import sys             # <<<<<<<<<<<<<<
  * 
+ * class SVGParserError(Exception):
+ */
+  __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sys, __pyx_t_1) < 0) __PYX_ERR(0, 2, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "svg/parser.pyi":4
+ * import sys
  * 
  * class SVGParserError(Exception):             # <<<<<<<<<<<<<<
  *     pass
@@ -5019,88 +5213,97 @@ static int __pyx_pymod_exec_svg(PyObject *__pyx_pyinit_module)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "svg/parser.pyx":8
+  /* "svg/parser.pyi":8
  * 
+ * 
+ * VALID_DPI_UNITS = ('px', 'pt', 'pc', 'mm', 'cm', 'in')             # <<<<<<<<<<<<<<
+ * 
+ * def _dpi_conv(dpi: str):
+ */
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_VALID_DPI_UNITS, __pyx_tuple__13) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+
+  /* "svg/parser.pyi":10
+ * VALID_DPI_UNITS = ('px', 'pt', 'pc', 'mm', 'cm', 'in')
  * 
  * def _dpi_conv(dpi: str):             # <<<<<<<<<<<<<<
- *     units = dpi[-2:].encode('UTF-8')
- *     _dpi = float(dpi[:-2])
+ *     if dpi[-2:] not in VALID_DPI_UNITS:
+ *         raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi[-2:]))
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_3svg_8__init___1_dpi_conv, NULL, __pyx_n_s_svg___init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_3svg_8__init___1_dpi_conv, NULL, __pyx_n_s_svg___init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dpi_conv, __pyx_t_1) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_dpi_conv, __pyx_t_1) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "svg/parser.pyx":20
+  /* "svg/parser.pyi":24
  * 
  *     @staticmethod
  *     def parse(svg: str, dpi: str = '96px') -> SVG:             # <<<<<<<<<<<<<<
  *         """
  *         Creates an SVG image from an SVG string. Units for dpi are 'px', 'pt',
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_3svg_8__init___6Parser_1parse, NULL, __pyx_n_s_svg___init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_3svg_8__init___6Parser_1parse, NULL, __pyx_n_s_svg___init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_3svg_8__init___Parser->tp_dict, __pyx_n_s_parse, __pyx_t_1) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_3svg_8__init___Parser->tp_dict, __pyx_n_s_parse, __pyx_t_1) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_3svg_8__init___Parser);
 
-  /* "svg/parser.pyx":19
+  /* "svg/parser.pyi":23
  *     """
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def parse(svg: str, dpi: str = '96px') -> SVG:
  *         """
  */
-  __pyx_t_1 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_3svg_8__init___Parser, __pyx_n_s_parse); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_3svg_8__init___Parser, __pyx_n_s_parse); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_staticmethod, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_staticmethod, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_3svg_8__init___Parser->tp_dict, __pyx_n_s_parse, __pyx_t_1) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_3svg_8__init___Parser->tp_dict, __pyx_n_s_parse, __pyx_t_1) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_3svg_8__init___Parser);
 
-  /* "svg/parser.pyx":34
+  /* "svg/parser.pyi":38
  * 
  *     @staticmethod
  *     def parse_file(filename: str, dpi: str = '96px') -> SVG:             # <<<<<<<<<<<<<<
  *         """
  *         Creates an SVG image from filename. Units for dpi are 'px', 'pt',
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_3svg_8__init___6Parser_3parse_file, NULL, __pyx_n_s_svg___init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_3svg_8__init___6Parser_3parse_file, NULL, __pyx_n_s_svg___init); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_3svg_8__init___Parser->tp_dict, __pyx_n_s_parse_file, __pyx_t_1) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_3svg_8__init___Parser->tp_dict, __pyx_n_s_parse_file, __pyx_t_1) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_3svg_8__init___Parser);
 
-  /* "svg/parser.pyx":33
+  /* "svg/parser.pyi":37
  *             return im
  * 
  *     @staticmethod             # <<<<<<<<<<<<<<
  *     def parse_file(filename: str, dpi: str = '96px') -> SVG:
  *         """
  */
-  __pyx_t_1 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_3svg_8__init___Parser, __pyx_n_s_parse_file); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetNameInClass((PyObject *)__pyx_ptype_3svg_8__init___Parser, __pyx_n_s_parse_file); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_staticmethod, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 33, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_staticmethod, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem((PyObject *)__pyx_ptype_3svg_8__init___Parser->tp_dict, __pyx_n_s_parse_file, __pyx_t_1) < 0) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (PyDict_SetItem((PyObject *)__pyx_ptype_3svg_8__init___Parser->tp_dict, __pyx_n_s_parse_file, __pyx_t_1) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   PyType_Modified(__pyx_ptype_3svg_8__init___Parser);
 
-  /* "svg/rasterizer.pyx":5
- * 
+  /* "svg/rasterizer.pyi":5
+ * import cython
  * 
  * class SVGRasterizerError(Exception):             # <<<<<<<<<<<<<<
  *     pass
@@ -5502,162 +5705,6 @@ static int __Pyx__ArgTypeTest(PyObject *obj, PyTypeObject *type, const char *nam
     return 0;
 }
 
-/* pyobject_as_double */
-static double __Pyx__PyObject_AsDouble(PyObject* obj) {
-    PyObject* float_value;
-#if !CYTHON_USE_TYPE_SLOTS
-    float_value = PyNumber_Float(obj);  if (0) goto bad;
-#else
-    PyNumberMethods *nb = Py_TYPE(obj)->tp_as_number;
-    if (likely(nb) && likely(nb->nb_float)) {
-        float_value = nb->nb_float(obj);
-        if (likely(float_value) && unlikely(!PyFloat_Check(float_value))) {
-            PyErr_Format(PyExc_TypeError,
-                "__float__ returned non-float (type %.200s)",
-                Py_TYPE(float_value)->tp_name);
-            Py_DECREF(float_value);
-            goto bad;
-        }
-    } else if (PyUnicode_CheckExact(obj) || PyBytes_CheckExact(obj)) {
-#if PY_MAJOR_VERSION >= 3
-        float_value = PyFloat_FromString(obj);
-#else
-        float_value = PyFloat_FromString(obj, 0);
-#endif
-    } else {
-        PyObject* args = PyTuple_New(1);
-        if (unlikely(!args)) goto bad;
-        PyTuple_SET_ITEM(args, 0, obj);
-        float_value = PyObject_Call((PyObject*)&PyFloat_Type, args, 0);
-        PyTuple_SET_ITEM(args, 0, 0);
-        Py_DECREF(args);
-    }
-#endif
-    if (likely(float_value)) {
-        double value = PyFloat_AS_DOUBLE(float_value);
-        Py_DECREF(float_value);
-        return value;
-    }
-bad:
-    return (double)-1;
-}
-
-/* RaiseDoubleKeywords */
-static void __Pyx_RaiseDoubleKeywordsError(
-    const char* func_name,
-    PyObject* kw_name)
-{
-    PyErr_Format(PyExc_TypeError,
-        #if PY_MAJOR_VERSION >= 3
-        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
-        #else
-        "%s() got multiple values for keyword argument '%s'", func_name,
-        PyString_AsString(kw_name));
-        #endif
-}
-
-/* ParseKeywords */
-static int __Pyx_ParseOptionalKeywords(
-    PyObject *kwds,
-    PyObject **argnames[],
-    PyObject *kwds2,
-    PyObject *values[],
-    Py_ssize_t num_pos_args,
-    const char* function_name)
-{
-    PyObject *key = 0, *value = 0;
-    Py_ssize_t pos = 0;
-    PyObject*** name;
-    PyObject*** first_kw_arg = argnames + num_pos_args;
-    while (PyDict_Next(kwds, &pos, &key, &value)) {
-        name = first_kw_arg;
-        while (*name && (**name != key)) name++;
-        if (*name) {
-            values[name-argnames] = value;
-            continue;
-        }
-        name = first_kw_arg;
-        #if PY_MAJOR_VERSION < 3
-        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
-            while (*name) {
-                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
-                        && _PyString_Eq(**name, key)) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    if ((**argname == key) || (
-                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
-                             && _PyString_Eq(**argname, key))) {
-                        goto arg_passed_twice;
-                    }
-                    argname++;
-                }
-            }
-        } else
-        #endif
-        if (likely(PyUnicode_Check(key))) {
-            while (*name) {
-                int cmp = (**name == key) ? 0 :
-                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
-                #endif
-                    PyUnicode_Compare(**name, key);
-                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                if (cmp == 0) {
-                    values[name-argnames] = value;
-                    break;
-                }
-                name++;
-            }
-            if (*name) continue;
-            else {
-                PyObject*** argname = argnames;
-                while (argname != first_kw_arg) {
-                    int cmp = (**argname == key) ? 0 :
-                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
-                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
-                    #endif
-                        PyUnicode_Compare(**argname, key);
-                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
-                    if (cmp == 0) goto arg_passed_twice;
-                    argname++;
-                }
-            }
-        } else
-            goto invalid_keyword_type;
-        if (kwds2) {
-            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
-        } else {
-            goto invalid_keyword;
-        }
-    }
-    return 0;
-arg_passed_twice:
-    __Pyx_RaiseDoubleKeywordsError(function_name, key);
-    goto bad;
-invalid_keyword_type:
-    PyErr_Format(PyExc_TypeError,
-        "%.200s() keywords must be strings", function_name);
-    goto bad;
-invalid_keyword:
-    PyErr_Format(PyExc_TypeError,
-    #if PY_MAJOR_VERSION < 3
-        "%.200s() got an unexpected keyword argument '%.200s'",
-        function_name, PyString_AsString(key));
-    #else
-        "%s() got an unexpected keyword argument '%U'",
-        function_name, key);
-    #endif
-bad:
-    return -1;
-}
-
 /* GetModuleGlobalName */
 static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
     PyObject *result;
@@ -5675,29 +5722,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetModuleGlobalName(PyObject *name) {
     }
     return result;
 }
-
-/* PyCFunctionFastCall */
-  #if CYTHON_FAST_PYCCALL
-static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
-    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
-    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
-    PyObject *self = PyCFunction_GET_SELF(func);
-    int flags = PyCFunction_GET_FLAGS(func);
-    assert(PyCFunction_Check(func));
-    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS)));
-    assert(nargs >= 0);
-    assert(nargs == 0 || args != NULL);
-    /* _PyCFunction_FastCallDict() must not be called with an exception set,
-       because it may clear it (directly or indirectly) and so the
-       caller loses its exception */
-    assert(!PyErr_Occurred());
-    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
-        return (*((__Pyx_PyCFunctionFastWithKeywords)meth)) (self, args, nargs, NULL);
-    } else {
-        return (*((__Pyx_PyCFunctionFast)meth)) (self, args, nargs);
-    }
-}
-#endif
 
 /* PyFunctionFastCall */
   #if CYTHON_FAST_PYCALL
@@ -5819,6 +5843,185 @@ done:
 #endif
 #endif
 
+/* PyCFunctionFastCall */
+  #if CYTHON_FAST_PYCCALL
+static CYTHON_INLINE PyObject * __Pyx_PyCFunction_FastCall(PyObject *func_obj, PyObject **args, Py_ssize_t nargs) {
+    PyCFunctionObject *func = (PyCFunctionObject*)func_obj;
+    PyCFunction meth = PyCFunction_GET_FUNCTION(func);
+    PyObject *self = PyCFunction_GET_SELF(func);
+    int flags = PyCFunction_GET_FLAGS(func);
+    assert(PyCFunction_Check(func));
+    assert(METH_FASTCALL == (flags & ~(METH_CLASS | METH_STATIC | METH_COEXIST | METH_KEYWORDS)));
+    assert(nargs >= 0);
+    assert(nargs == 0 || args != NULL);
+    /* _PyCFunction_FastCallDict() must not be called with an exception set,
+       because it may clear it (directly or indirectly) and so the
+       caller loses its exception */
+    assert(!PyErr_Occurred());
+    if ((PY_VERSION_HEX < 0x030700A0) || unlikely(flags & METH_KEYWORDS)) {
+        return (*((__Pyx_PyCFunctionFastWithKeywords)meth)) (self, args, nargs, NULL);
+    } else {
+        return (*((__Pyx_PyCFunctionFast)meth)) (self, args, nargs);
+    }
+}
+#endif
+
+/* pyobject_as_double */
+  static double __Pyx__PyObject_AsDouble(PyObject* obj) {
+    PyObject* float_value;
+#if !CYTHON_USE_TYPE_SLOTS
+    float_value = PyNumber_Float(obj);  if (0) goto bad;
+#else
+    PyNumberMethods *nb = Py_TYPE(obj)->tp_as_number;
+    if (likely(nb) && likely(nb->nb_float)) {
+        float_value = nb->nb_float(obj);
+        if (likely(float_value) && unlikely(!PyFloat_Check(float_value))) {
+            PyErr_Format(PyExc_TypeError,
+                "__float__ returned non-float (type %.200s)",
+                Py_TYPE(float_value)->tp_name);
+            Py_DECREF(float_value);
+            goto bad;
+        }
+    } else if (PyUnicode_CheckExact(obj) || PyBytes_CheckExact(obj)) {
+#if PY_MAJOR_VERSION >= 3
+        float_value = PyFloat_FromString(obj);
+#else
+        float_value = PyFloat_FromString(obj, 0);
+#endif
+    } else {
+        PyObject* args = PyTuple_New(1);
+        if (unlikely(!args)) goto bad;
+        PyTuple_SET_ITEM(args, 0, obj);
+        float_value = PyObject_Call((PyObject*)&PyFloat_Type, args, 0);
+        PyTuple_SET_ITEM(args, 0, 0);
+        Py_DECREF(args);
+    }
+#endif
+    if (likely(float_value)) {
+        double value = PyFloat_AS_DOUBLE(float_value);
+        Py_DECREF(float_value);
+        return value;
+    }
+bad:
+    return (double)-1;
+}
+
+/* RaiseDoubleKeywords */
+  static void __Pyx_RaiseDoubleKeywordsError(
+    const char* func_name,
+    PyObject* kw_name)
+{
+    PyErr_Format(PyExc_TypeError,
+        #if PY_MAJOR_VERSION >= 3
+        "%s() got multiple values for keyword argument '%U'", func_name, kw_name);
+        #else
+        "%s() got multiple values for keyword argument '%s'", func_name,
+        PyString_AsString(kw_name));
+        #endif
+}
+
+/* ParseKeywords */
+  static int __Pyx_ParseOptionalKeywords(
+    PyObject *kwds,
+    PyObject **argnames[],
+    PyObject *kwds2,
+    PyObject *values[],
+    Py_ssize_t num_pos_args,
+    const char* function_name)
+{
+    PyObject *key = 0, *value = 0;
+    Py_ssize_t pos = 0;
+    PyObject*** name;
+    PyObject*** first_kw_arg = argnames + num_pos_args;
+    while (PyDict_Next(kwds, &pos, &key, &value)) {
+        name = first_kw_arg;
+        while (*name && (**name != key)) name++;
+        if (*name) {
+            values[name-argnames] = value;
+            continue;
+        }
+        name = first_kw_arg;
+        #if PY_MAJOR_VERSION < 3
+        if (likely(PyString_CheckExact(key)) || likely(PyString_Check(key))) {
+            while (*name) {
+                if ((CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**name) == PyString_GET_SIZE(key))
+                        && _PyString_Eq(**name, key)) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    if ((**argname == key) || (
+                            (CYTHON_COMPILING_IN_PYPY || PyString_GET_SIZE(**argname) == PyString_GET_SIZE(key))
+                             && _PyString_Eq(**argname, key))) {
+                        goto arg_passed_twice;
+                    }
+                    argname++;
+                }
+            }
+        } else
+        #endif
+        if (likely(PyUnicode_Check(key))) {
+            while (*name) {
+                int cmp = (**name == key) ? 0 :
+                #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                    (PyUnicode_GET_SIZE(**name) != PyUnicode_GET_SIZE(key)) ? 1 :
+                #endif
+                    PyUnicode_Compare(**name, key);
+                if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                if (cmp == 0) {
+                    values[name-argnames] = value;
+                    break;
+                }
+                name++;
+            }
+            if (*name) continue;
+            else {
+                PyObject*** argname = argnames;
+                while (argname != first_kw_arg) {
+                    int cmp = (**argname == key) ? 0 :
+                    #if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION >= 3
+                        (PyUnicode_GET_SIZE(**argname) != PyUnicode_GET_SIZE(key)) ? 1 :
+                    #endif
+                        PyUnicode_Compare(**argname, key);
+                    if (cmp < 0 && unlikely(PyErr_Occurred())) goto bad;
+                    if (cmp == 0) goto arg_passed_twice;
+                    argname++;
+                }
+            }
+        } else
+            goto invalid_keyword_type;
+        if (kwds2) {
+            if (unlikely(PyDict_SetItem(kwds2, key, value))) goto bad;
+        } else {
+            goto invalid_keyword;
+        }
+    }
+    return 0;
+arg_passed_twice:
+    __Pyx_RaiseDoubleKeywordsError(function_name, key);
+    goto bad;
+invalid_keyword_type:
+    PyErr_Format(PyExc_TypeError,
+        "%.200s() keywords must be strings", function_name);
+    goto bad;
+invalid_keyword:
+    PyErr_Format(PyExc_TypeError,
+    #if PY_MAJOR_VERSION < 3
+        "%.200s() got an unexpected keyword argument '%.200s'",
+        function_name, PyString_AsString(key));
+    #else
+        "%s() got an unexpected keyword argument '%U'",
+        function_name, key);
+    #endif
+bad:
+    return -1;
+}
+
 /* PyObjectCallMethO */
   #if CYTHON_COMPILING_IN_CPYTHON
 static CYTHON_INLINE PyObject* __Pyx_PyObject_CallMethO(PyObject *func, PyObject *arg) {
@@ -5939,8 +6142,29 @@ static CYTHON_INLINE PyObject* __Pyx_PyObject_CallOneArg(PyObject *func, PyObjec
     return 0;
 }
 
+/* PyObjectCallNoArg */
+  #if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
+#if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(func)) {
+        return __Pyx_PyFunction_FastCall(func, NULL, 0);
+    }
+#endif
+#ifdef __Pyx_CyFunction_USED
+    if (likely(PyCFunction_Check(func) || __Pyx_TypeCheck(func, __pyx_CyFunctionType))) {
+#else
+    if (likely(PyCFunction_Check(func))) {
+#endif
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_NOARGS)) {
+            return __Pyx_PyObject_CallMethO(func, NULL);
+        }
+    }
+    return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
+}
+#endif
+
 /* PyErrExceptionMatches */
-  #if CYTHON_FAST_THREAD_STATE
+    #if CYTHON_FAST_THREAD_STATE
 static int __Pyx_PyErr_ExceptionMatchesTuple(PyObject *exc_type, PyObject *tuple) {
     Py_ssize_t i, n;
     n = PyTuple_GET_SIZE(tuple);
@@ -5965,7 +6189,7 @@ static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tsta
 #endif
 
 /* GetAttr */
-  static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *o, PyObject *n) {
+    static CYTHON_INLINE PyObject *__Pyx_GetAttr(PyObject *o, PyObject *n) {
 #if CYTHON_USE_TYPE_SLOTS
 #if PY_MAJOR_VERSION >= 3
     if (likely(PyUnicode_Check(n)))
@@ -5978,7 +6202,7 @@ static CYTHON_INLINE int __Pyx_PyErr_ExceptionMatchesInState(PyThreadState* tsta
 }
 
 /* GetAttr3 */
-  static PyObject *__Pyx_GetAttr3Default(PyObject *d) {
+    static PyObject *__Pyx_GetAttr3Default(PyObject *d) {
     __Pyx_PyThreadState_declare
     __Pyx_PyThreadState_assign
     if (unlikely(!__Pyx_PyErr_ExceptionMatches(PyExc_AttributeError)))
@@ -5992,93 +6216,8 @@ static CYTHON_INLINE PyObject *__Pyx_GetAttr3(PyObject *o, PyObject *n, PyObject
     return (likely(r)) ? r : __Pyx_GetAttr3Default(d);
 }
 
-/* PyIntBinop */
-  #if !CYTHON_COMPILING_IN_PYPY
-static PyObject* __Pyx_PyInt_EqObjC(PyObject *op1, PyObject *op2, CYTHON_UNUSED long intval, CYTHON_UNUSED int inplace) {
-    if (op1 == op2) {
-        Py_RETURN_TRUE;
-    }
-    #if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_CheckExact(op1))) {
-        const long b = intval;
-        long a = PyInt_AS_LONG(op1);
-        if (a == b) {
-            Py_RETURN_TRUE;
-        } else {
-            Py_RETURN_FALSE;
-        }
-    }
-    #endif
-    #if CYTHON_USE_PYLONG_INTERNALS
-    if (likely(PyLong_CheckExact(op1))) {
-        const long b = intval;
-        long a;
-        const digit* digits = ((PyLongObject*)op1)->ob_digit;
-        const Py_ssize_t size = Py_SIZE(op1);
-        if (likely(__Pyx_sst_abs(size) <= 1)) {
-            a = likely(size) ? digits[0] : 0;
-            if (size == -1) a = -a;
-        } else {
-            switch (size) {
-                case -2:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        a = -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    }
-                case 2:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        a = (long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    }
-                case -3:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        a = -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    }
-                case 3:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        a = (long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    }
-                case -4:
-                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                        a = -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    }
-                case 4:
-                    if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                        a = (long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0]));
-                        break;
-                    }
-                #if PyLong_SHIFT < 30 && PyLong_SHIFT != 15
-                default: return PyLong_Type.tp_richcompare(op1, op2, Py_EQ);
-                #else
-                default: Py_RETURN_FALSE;
-                #endif
-            }
-        }
-            if (a == b) {
-                Py_RETURN_TRUE;
-            } else {
-                Py_RETURN_FALSE;
-            }
-    }
-    #endif
-    if (PyFloat_CheckExact(op1)) {
-        const long b = intval;
-        double a = PyFloat_AS_DOUBLE(op1);
-            if ((double)a == (double)b) {
-                Py_RETURN_TRUE;
-            } else {
-                Py_RETURN_FALSE;
-            }
-    }
-    return PyObject_RichCompare(op1, op2, Py_EQ);
-}
-#endif
-
 /* Import */
-  static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
+    static PyObject *__Pyx_Import(PyObject *name, PyObject *from_list, int level) {
     PyObject *empty_list = 0;
     PyObject *module = 0;
     PyObject *global_dict = 0;
@@ -6143,7 +6282,7 @@ bad:
 }
 
 /* ImportFrom */
-  static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
+    static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
     PyObject* value = __Pyx_PyObject_GetAttrStr(module, name);
     if (unlikely(!value) && PyErr_ExceptionMatches(PyExc_AttributeError)) {
         PyErr_Format(PyExc_ImportError,
@@ -6157,7 +6296,7 @@ bad:
 }
 
 /* HasAttr */
-  static CYTHON_INLINE int __Pyx_HasAttr(PyObject *o, PyObject *n) {
+    static CYTHON_INLINE int __Pyx_HasAttr(PyObject *o, PyObject *n) {
     PyObject *r;
     if (unlikely(!__Pyx_PyBaseString_Check(n))) {
         PyErr_SetString(PyExc_TypeError,
@@ -6175,7 +6314,7 @@ bad:
 }
 
 /* GetItemInt */
-  static PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j) {
+    static PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j) {
     PyObject *r;
     if (!j) return NULL;
     r = PyObject_GetItem(o, j);
@@ -6262,7 +6401,7 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i, 
 }
 
 /* SetPackagePathFromImportLib */
-  #if PY_MAJOR_VERSION >= 3 && !CYTHON_PEP489_MULTI_PHASE_INIT
+    #if PY_MAJOR_VERSION >= 3 && !CYTHON_PEP489_MULTI_PHASE_INIT
 static int __Pyx_SetPackagePathFromImportLib(const char* parent_package_name, PyObject *module_name) {
     PyObject *importlib, *loader, *osmod, *ossep, *parts, *package_path;
     PyObject *path = NULL, *file_path = NULL;
@@ -6325,7 +6464,7 @@ set_path:
 #endif
 
 /* SetupReduce */
-  static int __Pyx_setup_reduce_is_named(PyObject* meth, PyObject* name) {
+    static int __Pyx_setup_reduce_is_named(PyObject* meth, PyObject* name) {
   int ret;
   PyObject *name_attr;
   name_attr = __Pyx_PyObject_GetAttrStr(meth, __pyx_n_s_name);
@@ -6401,7 +6540,7 @@ GOOD:
 }
 
 /* CalculateMetaclass */
-  static PyObject *__Pyx_CalculateMetaclass(PyTypeObject *metaclass, PyObject *bases) {
+    static PyObject *__Pyx_CalculateMetaclass(PyTypeObject *metaclass, PyObject *bases) {
     Py_ssize_t i, nbases = PyTuple_GET_SIZE(bases);
     for (i=0; i < nbases; i++) {
         PyTypeObject *tmptype;
@@ -6440,7 +6579,7 @@ GOOD:
 }
 
 /* Py3ClassCreate */
-  static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases, PyObject *name,
+    static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases, PyObject *name,
                                            PyObject *qualname, PyObject *mkw, PyObject *modname, PyObject *doc) {
     PyObject *ns;
     if (metaclass) {
@@ -6507,7 +6646,7 @@ static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObj
 }
 
 /* GetNameInClass */
-  static PyObject *__Pyx_GetGlobalNameAfterAttributeLookup(PyObject *name) {
+    static PyObject *__Pyx_GetGlobalNameAfterAttributeLookup(PyObject *name) {
     __Pyx_PyThreadState_declare
     __Pyx_PyThreadState_assign
     if (unlikely(!__Pyx_PyErr_ExceptionMatches(PyExc_AttributeError)))
@@ -6525,7 +6664,7 @@ static PyObject *__Pyx_GetNameInClass(PyObject *nmspace, PyObject *name) {
 }
 
 /* CLineInTraceback */
-  #ifndef CYTHON_CLINE_IN_TRACEBACK
+    #ifndef CYTHON_CLINE_IN_TRACEBACK
 static int __Pyx_CLineForTraceback(CYTHON_UNUSED PyThreadState *tstate, int c_line) {
     PyObject *use_cline;
     PyObject *ptype, *pvalue, *ptraceback;
@@ -6562,7 +6701,7 @@ static int __Pyx_CLineForTraceback(CYTHON_UNUSED PyThreadState *tstate, int c_li
 #endif
 
 /* CodeObjectCache */
-  static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
+    static int __pyx_bisect_code_objects(__Pyx_CodeObjectCacheEntry* entries, int count, int code_line) {
     int start = 0, mid = 0, end = count - 1;
     if (end >= 0 && code_line > entries[end].code_line) {
         return count;
@@ -6642,7 +6781,7 @@ static void __pyx_insert_code_object(int code_line, PyCodeObject* code_object) {
 }
 
 /* AddTraceback */
-  #include "compile.h"
+    #include "compile.h"
 #include "frameobject.h"
 #include "traceback.h"
 static PyCodeObject* __Pyx_CreateCodeObjectForTraceback(
@@ -6727,7 +6866,7 @@ bad:
 }
 
 /* CIntFromPyVerify */
-  #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
+    #define __PYX_VERIFY_RETURN_INT(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 0)
 #define __PYX_VERIFY_RETURN_INT_EXC(target_type, func_type, func_value)\
     __PYX__VERIFY_RETURN_INT(target_type, func_type, func_value, 1)
@@ -6749,7 +6888,7 @@ bad:
     }
 
 /* CIntToPy */
-  static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
     const long neg_one = (long) -1, const_zero = (long) 0;
     const int is_unsigned = neg_one > const_zero;
     if (is_unsigned) {
@@ -6780,196 +6919,7 @@ bad:
 }
 
 /* CIntFromPy */
-  static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
-    const long neg_one = (long) -1, const_zero = (long) 0;
-    const int is_unsigned = neg_one > const_zero;
-#if PY_MAJOR_VERSION < 3
-    if (likely(PyInt_Check(x))) {
-        if (sizeof(long) < sizeof(long)) {
-            __PYX_VERIFY_RETURN_INT(long, long, PyInt_AS_LONG(x))
-        } else {
-            long val = PyInt_AS_LONG(x);
-            if (is_unsigned && unlikely(val < 0)) {
-                goto raise_neg_overflow;
-            }
-            return (long) val;
-        }
-    } else
-#endif
-    if (likely(PyLong_Check(x))) {
-        if (is_unsigned) {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (long) 0;
-                case  1: __PYX_VERIFY_RETURN_INT(long, digit, digits[0])
-                case 2:
-                    if (8 * sizeof(long) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) >= 2 * PyLong_SHIFT) {
-                            return (long) (((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(long) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) >= 3 * PyLong_SHIFT) {
-                            return (long) (((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(long) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) >= 4 * PyLong_SHIFT) {
-                            return (long) (((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
-                        }
-                    }
-                    break;
-            }
-#endif
-#if CYTHON_COMPILING_IN_CPYTHON
-            if (unlikely(Py_SIZE(x) < 0)) {
-                goto raise_neg_overflow;
-            }
-#else
-            {
-                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
-                if (unlikely(result < 0))
-                    return (long) -1;
-                if (unlikely(result == 1))
-                    goto raise_neg_overflow;
-            }
-#endif
-            if (sizeof(long) <= sizeof(unsigned long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(long, unsigned long, PyLong_AsUnsignedLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(long, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
-#endif
-            }
-        } else {
-#if CYTHON_USE_PYLONG_INTERNALS
-            const digit* digits = ((PyLongObject*)x)->ob_digit;
-            switch (Py_SIZE(x)) {
-                case  0: return (long) 0;
-                case -1: __PYX_VERIFY_RETURN_INT(long, sdigit, (sdigit) (-(sdigit)digits[0]))
-                case  1: __PYX_VERIFY_RETURN_INT(long,  digit, +digits[0])
-                case -2:
-                    if (8 * sizeof(long) - 1 > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                            return (long) (((long)-1)*(((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case 2:
-                    if (8 * sizeof(long) > 1 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                            return (long) ((((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case -3:
-                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                            return (long) (((long)-1)*(((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case 3:
-                    if (8 * sizeof(long) > 2 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                            return (long) ((((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case -4:
-                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                            return (long) (((long)-1)*(((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-                case 4:
-                    if (8 * sizeof(long) > 3 * PyLong_SHIFT) {
-                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
-                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
-                        } else if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
-                            return (long) ((((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
-                        }
-                    }
-                    break;
-            }
-#endif
-            if (sizeof(long) <= sizeof(long)) {
-                __PYX_VERIFY_RETURN_INT_EXC(long, long, PyLong_AsLong(x))
-#ifdef HAVE_LONG_LONG
-            } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
-                __PYX_VERIFY_RETURN_INT_EXC(long, PY_LONG_LONG, PyLong_AsLongLong(x))
-#endif
-            }
-        }
-        {
-#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
-            PyErr_SetString(PyExc_RuntimeError,
-                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
-#else
-            long val;
-            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
- #if PY_MAJOR_VERSION < 3
-            if (likely(v) && !PyLong_Check(v)) {
-                PyObject *tmp = v;
-                v = PyNumber_Long(tmp);
-                Py_DECREF(tmp);
-            }
- #endif
-            if (likely(v)) {
-                int one = 1; int is_little = (int)*(unsigned char *)&one;
-                unsigned char *bytes = (unsigned char *)&val;
-                int ret = _PyLong_AsByteArray((PyLongObject *)v,
-                                              bytes, sizeof(val),
-                                              is_little, !is_unsigned);
-                Py_DECREF(v);
-                if (likely(!ret))
-                    return val;
-            }
-#endif
-            return (long) -1;
-        }
-    } else {
-        long val;
-        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
-        if (!tmp) return (long) -1;
-        val = __Pyx_PyInt_As_long(tmp);
-        Py_DECREF(tmp);
-        return val;
-    }
-raise_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "value too large to convert to long");
-    return (long) -1;
-raise_neg_overflow:
-    PyErr_SetString(PyExc_OverflowError,
-        "can't convert negative value to long");
-    return (long) -1;
-}
-
-/* CIntFromPy */
-  static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
+    static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
     const int neg_one = (int) -1, const_zero = (int) 0;
     const int is_unsigned = neg_one > const_zero;
 #if PY_MAJOR_VERSION < 3
@@ -7157,8 +7107,197 @@ raise_neg_overflow:
     return (int) -1;
 }
 
+/* CIntFromPy */
+    static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *x) {
+    const long neg_one = (long) -1, const_zero = (long) 0;
+    const int is_unsigned = neg_one > const_zero;
+#if PY_MAJOR_VERSION < 3
+    if (likely(PyInt_Check(x))) {
+        if (sizeof(long) < sizeof(long)) {
+            __PYX_VERIFY_RETURN_INT(long, long, PyInt_AS_LONG(x))
+        } else {
+            long val = PyInt_AS_LONG(x);
+            if (is_unsigned && unlikely(val < 0)) {
+                goto raise_neg_overflow;
+            }
+            return (long) val;
+        }
+    } else
+#endif
+    if (likely(PyLong_Check(x))) {
+        if (is_unsigned) {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (long) 0;
+                case  1: __PYX_VERIFY_RETURN_INT(long, digit, digits[0])
+                case 2:
+                    if (8 * sizeof(long) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) >= 2 * PyLong_SHIFT) {
+                            return (long) (((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(long) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) >= 3 * PyLong_SHIFT) {
+                            return (long) (((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(long) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) >= 4 * PyLong_SHIFT) {
+                            return (long) (((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0]));
+                        }
+                    }
+                    break;
+            }
+#endif
+#if CYTHON_COMPILING_IN_CPYTHON
+            if (unlikely(Py_SIZE(x) < 0)) {
+                goto raise_neg_overflow;
+            }
+#else
+            {
+                int result = PyObject_RichCompareBool(x, Py_False, Py_LT);
+                if (unlikely(result < 0))
+                    return (long) -1;
+                if (unlikely(result == 1))
+                    goto raise_neg_overflow;
+            }
+#endif
+            if (sizeof(long) <= sizeof(unsigned long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(long, unsigned long, PyLong_AsUnsignedLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(long, unsigned PY_LONG_LONG, PyLong_AsUnsignedLongLong(x))
+#endif
+            }
+        } else {
+#if CYTHON_USE_PYLONG_INTERNALS
+            const digit* digits = ((PyLongObject*)x)->ob_digit;
+            switch (Py_SIZE(x)) {
+                case  0: return (long) 0;
+                case -1: __PYX_VERIFY_RETURN_INT(long, sdigit, (sdigit) (-(sdigit)digits[0]))
+                case  1: __PYX_VERIFY_RETURN_INT(long,  digit, +digits[0])
+                case -2:
+                    if (8 * sizeof(long) - 1 > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                            return (long) (((long)-1)*(((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case 2:
+                    if (8 * sizeof(long) > 1 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 2 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                            return (long) ((((((long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case -3:
+                    if (8 * sizeof(long) - 1 > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                            return (long) (((long)-1)*(((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case 3:
+                    if (8 * sizeof(long) > 2 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 3 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                            return (long) ((((((((long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case -4:
+                    if (8 * sizeof(long) - 1 > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, long, -(long) (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                            return (long) (((long)-1)*(((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+                case 4:
+                    if (8 * sizeof(long) > 3 * PyLong_SHIFT) {
+                        if (8 * sizeof(unsigned long) > 4 * PyLong_SHIFT) {
+                            __PYX_VERIFY_RETURN_INT(long, unsigned long, (((((((((unsigned long)digits[3]) << PyLong_SHIFT) | (unsigned long)digits[2]) << PyLong_SHIFT) | (unsigned long)digits[1]) << PyLong_SHIFT) | (unsigned long)digits[0])))
+                        } else if (8 * sizeof(long) - 1 > 4 * PyLong_SHIFT) {
+                            return (long) ((((((((((long)digits[3]) << PyLong_SHIFT) | (long)digits[2]) << PyLong_SHIFT) | (long)digits[1]) << PyLong_SHIFT) | (long)digits[0])));
+                        }
+                    }
+                    break;
+            }
+#endif
+            if (sizeof(long) <= sizeof(long)) {
+                __PYX_VERIFY_RETURN_INT_EXC(long, long, PyLong_AsLong(x))
+#ifdef HAVE_LONG_LONG
+            } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
+                __PYX_VERIFY_RETURN_INT_EXC(long, PY_LONG_LONG, PyLong_AsLongLong(x))
+#endif
+            }
+        }
+        {
+#if CYTHON_COMPILING_IN_PYPY && !defined(_PyLong_AsByteArray)
+            PyErr_SetString(PyExc_RuntimeError,
+                            "_PyLong_AsByteArray() not available in PyPy, cannot convert large numbers");
+#else
+            long val;
+            PyObject *v = __Pyx_PyNumber_IntOrLong(x);
+ #if PY_MAJOR_VERSION < 3
+            if (likely(v) && !PyLong_Check(v)) {
+                PyObject *tmp = v;
+                v = PyNumber_Long(tmp);
+                Py_DECREF(tmp);
+            }
+ #endif
+            if (likely(v)) {
+                int one = 1; int is_little = (int)*(unsigned char *)&one;
+                unsigned char *bytes = (unsigned char *)&val;
+                int ret = _PyLong_AsByteArray((PyLongObject *)v,
+                                              bytes, sizeof(val),
+                                              is_little, !is_unsigned);
+                Py_DECREF(v);
+                if (likely(!ret))
+                    return val;
+            }
+#endif
+            return (long) -1;
+        }
+    } else {
+        long val;
+        PyObject *tmp = __Pyx_PyNumber_IntOrLong(x);
+        if (!tmp) return (long) -1;
+        val = __Pyx_PyInt_As_long(tmp);
+        Py_DECREF(tmp);
+        return val;
+    }
+raise_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "value too large to convert to long");
+    return (long) -1;
+raise_neg_overflow:
+    PyErr_SetString(PyExc_OverflowError,
+        "can't convert negative value to long");
+    return (long) -1;
+}
+
 /* FastTypeChecks */
-  #if CYTHON_COMPILING_IN_CPYTHON
+    #if CYTHON_COMPILING_IN_CPYTHON
 static int __Pyx_InBases(PyTypeObject *a, PyTypeObject *b) {
     while (a) {
         a = a->tp_base;
@@ -7230,7 +7369,7 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 #endif
 
 /* CheckBinaryVersion */
-  static int __Pyx_check_binary_version(void) {
+    static int __Pyx_check_binary_version(void) {
     char ctversion[4], rtversion[4];
     PyOS_snprintf(ctversion, 4, "%d.%d", PY_MAJOR_VERSION, PY_MINOR_VERSION);
     PyOS_snprintf(rtversion, 4, "%s", Py_GetVersion());
@@ -7246,7 +7385,7 @@ static CYTHON_INLINE int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObj
 }
 
 /* InitStrings */
-  static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
+    static int __Pyx_InitStrings(__Pyx_StringTabEntry *t) {
     while (t->p) {
         #if PY_MAJOR_VERSION < 3
         if (t->is_unicode) {

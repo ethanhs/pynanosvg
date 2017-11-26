@@ -40,18 +40,19 @@ cdef class Rasterizer:
     def rasterize_to_buffer(self, svg: SVG,
                             width: cython.int,
                             height: cython.int,
+                            stride: cython.int,
+                            buffer: bytes,
                             scale: cython.float = 1.0,
                             tx: cython.int = 0,
                             ty: cython.int = 0,
-                            stride: cython.int = 0,
-                            buffer: bytes = None):
+                            ):
         """
-        Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually w * 4.
+        Rasterizes the SVG into a given buffer, which should be of length width * height * 4. Stride is usually width * 4.
         """
         if not isinstance(buffer, bytes):
             raise TypeError("`buffer` must be bytes, found {}".format(type(buffer)))
-        if stride == 0:
-            raise ValueError('You must set a stride to rasterize to a buffer, stride is 0')
+        if stride <= 0:
+            raise ValueError('You must set a stride to rasterize to a buffer, stride must be positive.')
         if svg._nsvgimage == NULL:
             raise ValueError('The given SVG is empty, you must parse the SVG first.')
         nsvgRasterize(self._nsvgrasterizer,
