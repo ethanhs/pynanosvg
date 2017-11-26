@@ -1179,6 +1179,7 @@ static const char __pyx_k_file[] = "file";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_0_1_0[] = "0.1.0";
 static const char __pyx_k_UTF_8[] = "UTF-8";
 static const char __pyx_k_dpi_2[] = "_dpi";
 static const char __pyx_k_parse[] = "parse";
@@ -1196,6 +1197,7 @@ static const char __pyx_k_reduce[] = "__reduce__";
 static const char __pyx_k_stride[] = "stride";
 static const char __pyx_k_update[] = "update";
 static const char __pyx_k_prepare[] = "__prepare__";
+static const char __pyx_k_version[] = "__version__";
 static const char __pyx_k_dpi_conv[] = "_dpi_conv";
 static const char __pyx_k_filename[] = "filename";
 static const char __pyx_k_getstate[] = "__getstate__";
@@ -1235,6 +1237,7 @@ static const char __pyx_k_svg_must_be_either_str_or_bytes[] = "svg must be eithe
 static const char __pyx_k_Incompatible_checksums_s_vs_0xd4[] = "Incompatible checksums (%s vs 0xd41d8cd = ())";
 static const char __pyx_k_You_must_set_a_stride_to_rasteri[] = "You must set a stride to rasterize to a buffer, stride must be positive.";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
+static PyObject *__pyx_kp_s_0_1_0;
 static PyObject *__pyx_kp_s_96px;
 static PyObject *__pyx_kp_s_Could_not_parse_SVG_from;
 static PyObject *__pyx_kp_s_Could_not_parse_SVG_from_string;
@@ -1312,6 +1315,7 @@ static PyObject *__pyx_n_s_tx;
 static PyObject *__pyx_n_s_ty;
 static PyObject *__pyx_n_s_units;
 static PyObject *__pyx_n_s_update;
+static PyObject *__pyx_n_s_version;
 static PyObject *__pyx_n_s_width;
 static int __pyx_pf_3svg_8__init___3SVG___cinit__(struct __pyx_obj_3svg_8__init___SVG *__pyx_v_self); /* proto */
 static void __pyx_pf_3svg_8__init___3SVG_2__dealloc__(struct __pyx_obj_3svg_8__init___SVG *__pyx_v_self); /* proto */
@@ -4859,6 +4863,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
+  {&__pyx_kp_s_0_1_0, __pyx_k_0_1_0, sizeof(__pyx_k_0_1_0), 0, 0, 1, 0},
   {&__pyx_kp_s_96px, __pyx_k_96px, sizeof(__pyx_k_96px), 0, 0, 1, 0},
   {&__pyx_kp_s_Could_not_parse_SVG_from, __pyx_k_Could_not_parse_SVG_from, sizeof(__pyx_k_Could_not_parse_SVG_from), 0, 0, 1, 0},
   {&__pyx_kp_s_Could_not_parse_SVG_from_string, __pyx_k_Could_not_parse_SVG_from_string, sizeof(__pyx_k_Could_not_parse_SVG_from_string), 0, 0, 1, 0},
@@ -4936,6 +4941,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ty, __pyx_k_ty, sizeof(__pyx_k_ty), 0, 0, 1, 1},
   {&__pyx_n_s_units, __pyx_k_units, sizeof(__pyx_k_units), 0, 0, 1, 1},
   {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
+  {&__pyx_n_s_version, __pyx_k_version, sizeof(__pyx_k_version), 0, 0, 1, 1},
   {&__pyx_n_s_width, __pyx_k_width, sizeof(__pyx_k_width), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
@@ -5314,6 +5320,15 @@ static int __pyx_pymod_exec_svg(PyObject *__pyx_pyinit_module)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(4, 1, __pyx_L1_error)
   #endif
 
+  /* "svg/__init__.pyx":3
+ * from nanosvg cimport (NSVGimage, nsvgDelete, nsvgParse, nsvgParseFromFile)
+ * 
+ * __version__ = "0.1.0"             # <<<<<<<<<<<<<<
+ * 
+ * include "svg.pyi"
+ */
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_s_0_1_0) < 0) __PYX_ERR(4, 3, __pyx_L1_error)
+
   /* "svg/parser.pyi":2
  * from nanosvg cimport (NSVGimage, nsvgParse, nsvgParseFromFile)
  * import sys             # <<<<<<<<<<<<<<
@@ -5475,7 +5490,7 @@ static int __pyx_pymod_exec_svg(PyObject *__pyx_pyinit_module)
   /* "svg/__init__.pyx":1
  * from nanosvg cimport (NSVGimage, nsvgDelete, nsvgParse, nsvgParseFromFile)             # <<<<<<<<<<<<<<
  * 
- * 
+ * __version__ = "0.1.0"
  */
   __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(4, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);

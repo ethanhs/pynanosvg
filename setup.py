@@ -13,7 +13,7 @@ ext = [Extension('svg', sources=['svg/__init__.pyx'],
 
 setup(
     name="pynanosvg",
-    version="0.0.1",
+    version="0.1.0",
     description="Wrapper around nanosvg",
     author="Ethan Smith",
     author_email="ethan@ethanhs.me",

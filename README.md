@@ -15,6 +15,10 @@ python3 -m pip install -r requirements.txt
 python3 setup.py install
 ```
 
+or just
+
+> python3 -m pip install pynanosvg
+
 # Usage
 
 The following parses an SVG file, rasterizes it, and saves it as a PNG
