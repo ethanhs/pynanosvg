@@ -5,7 +5,11 @@ class SVGParserError(Exception):
     pass
 
 
+VALID_DPI_UNITS = ('px', 'pt', 'pc', 'mm', 'cm', 'in')
+
 def _dpi_conv(dpi: str):
+    if dpi not in VALID_DPI_UNITS:
+        raise ValueError("dpi needs to be one of {}, got {}".format(VALID_DPI_UNITS, dpi))
     units = dpi[-2:].encode('UTF-8')
     _dpi = float(dpi[:-2])
     return units, _dpi
