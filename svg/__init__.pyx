@@ -1,6 +1,4 @@
-from nanosvg cimport (NSVGimage, nsvgDelete, nsvgParse, nsvgParseFromFile)
-
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 include "svg.pyi"
 include "parser.pyi"

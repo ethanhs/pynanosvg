@@ -1,5 +1,3 @@
-from nanosvg cimport (nsvgCreateRasterizer, nsvgRasterize,
-                      nsvgDeleteRasterizer, NSVGrasterizer)
 import cython
 
 class SVGRasterizerError(Exception):

@@ -11,6 +11,8 @@ __pycache__/
 #ignore cython generated files
 pynanosvg/*.c
 
+.pytest_cache/
+.vscode/
 
 # Distribution / packaging
 .Python

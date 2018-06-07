@@ -1,4 +1,3 @@
-from nanosvg cimport (NSVGimage, nsvgParse, nsvgParseFromFile)
 import sys
 
 class SVGParserError(Exception):
