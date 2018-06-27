@@ -1,2 +1,3 @@
 recursive-include svg *.pyx *.pyi *.pxd *.h
 recursive-include svg-stubs *.pyi
+recursive-include nanosvg *
