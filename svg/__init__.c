@@ -1234,7 +1234,7 @@ static const char __pyx_k_file[] = "file";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_0_3_0[] = "0.3.0";
+static const char __pyx_k_0_3_1[] = "0.3.1";
 static const char __pyx_k_UTF_8[] = "UTF-8";
 static const char __pyx_k_dpi_2[] = "_dpi";
 static const char __pyx_k_parse[] = "parse";
@@ -1291,7 +1291,7 @@ static const char __pyx_k_svg_must_be_either_str_or_bytes[] = "svg must be eithe
 static const char __pyx_k_Incompatible_checksums_s_vs_0xd4[] = "Incompatible checksums (%s vs 0xd41d8cd = ())";
 static const char __pyx_k_You_must_set_a_stride_to_rasteri[] = "You must set a stride to rasterize to a buffer, stride must be positive.";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
-static PyObject *__pyx_kp_s_0_3_0;
+static PyObject *__pyx_kp_s_0_3_1;
 static PyObject *__pyx_kp_s_96px;
 static PyObject *__pyx_kp_s_Could_not_parse_SVG_from;
 static PyObject *__pyx_kp_s_Could_not_parse_SVG_from_string;
@@ -4844,7 +4844,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_0_3_0, __pyx_k_0_3_0, sizeof(__pyx_k_0_3_0), 0, 0, 1, 0},
+  {&__pyx_kp_s_0_3_1, __pyx_k_0_3_1, sizeof(__pyx_k_0_3_1), 0, 0, 1, 0},
   {&__pyx_kp_s_96px, __pyx_k_96px, sizeof(__pyx_k_96px), 0, 0, 1, 0},
   {&__pyx_kp_s_Could_not_parse_SVG_from, __pyx_k_Could_not_parse_SVG_from, sizeof(__pyx_k_Could_not_parse_SVG_from), 0, 0, 1, 0},
   {&__pyx_kp_s_Could_not_parse_SVG_from_string, __pyx_k_Could_not_parse_SVG_from_string, sizeof(__pyx_k_Could_not_parse_SVG_from_string), 0, 0, 1, 0},
@@ -5402,11 +5402,11 @@ if (!__Pyx_RefNanny) {
   #endif
 
   /* "svg/__init__.pyx":1
- * __version__ = "0.3.0"             # <<<<<<<<<<<<<<
+ * __version__ = "0.3.1"             # <<<<<<<<<<<<<<
  * 
  * include "svg.pyi"
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_s_0_3_0) < 0) __PYX_ERR(4, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_version, __pyx_kp_s_0_3_1) < 0) __PYX_ERR(4, 1, __pyx_L1_error)
 
   /* "svg/parser.pyi":1
  * import sys             # <<<<<<<<<<<<<<
@@ -5556,7 +5556,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "svg/__init__.pyx":1
- * __version__ = "0.3.0"             # <<<<<<<<<<<<<<
+ * __version__ = "0.3.1"             # <<<<<<<<<<<<<<
  * 
  * include "svg.pyi"
  */
