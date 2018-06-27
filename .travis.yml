@@ -15,7 +15,7 @@ install:
   - docker pull $DOCKER_IMAGE
 
 script:
-  - ls -l /io
+  - ls -l
   - docker run --rm -v `pwd`:/io $DOCKER_IMAGE $PRE_CMD /io/.travis/linux-manywheel.sh
 
 notifications:
