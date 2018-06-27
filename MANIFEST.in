@@ -1,0 +1,2 @@
+recursive-include svg *.pyx *.pyi *.pxd
+recursive-include svg-stubs *.pyi
