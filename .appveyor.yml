@@ -1,30 +1,18 @@
 cache:
   - '%LOCALAPPDATA%\pip\Cache'
-
 environment:
+  CIBW_SKIP: cp27-* cp33-* cp34-*
+  CIBW_BEFORE_BUILD: pip install -r test-requirements.txt
   matrix:
-    - PYTHON: "C:\\Python35"
-      PYTHON_VERSION: "3.5.x"
-      PYTHON_ARCH: "32"
-      
-    - PYTHON: "C:\\Python35-x64"
-      PYTHON_VERSION: "3.5.x"
-      PYTHON_ARCH: "64"
-    
-    - PYTHON: "C:\\Python36"
-      PYTHON_VERSION: "3.6.x"
-      PYTHON_ARCH: "32"
-      
-    - PYTHON: "C:\\Python36-x64"
-      PYTHON_VERSION: "3.6.x"
-      PYTHON_ARCH: "64"
+      - PYTHON: "C:\\Python35-x64"
+        PYTHON_VERSION: "3.5.x"
+        PYTHON_ARCH: "64"
+build_script:
+  - "git submodule update --init"
+  - "%PYTHON%\\python.exe -m pip install -r test-requirements.txt"
+  - "%PYTHON%\\python.exe -m pip install cibuildwheel"
+  - "%PYTHON%\\python.exe -m cibuildwheel --output-dir wheelhouse"
 
-install:
-    - "git submodule update --init"
-    - "%PYTHON%\\python.exe -m pip install -r test-requirements.txt"
-    - "%PYTHON%\\python.exe setup.py install"
-
-build: off
-
-test_script:
-    - "%PYTHON%\\python.exe -m pytest"
+artifacts:
+  - path: "wheelhouse\\*.whl"
+    name: Wheels

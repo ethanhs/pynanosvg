@@ -1,22 +1,25 @@
+language: python
+
 matrix:
   include:
     - sudo: required
       services:
         - docker
-      env: DOCKER_IMAGE=quay.io/pypa/manylinux1_x86_64
-    - sudo: required
-      services:
-        - docker
-      env: DOCKER_IMAGE=quay.io/pypa/manylinux1_i686
-            PRE_CMD=linux32
-
-
-install:
-  - docker pull $DOCKER_IMAGE
+      env: 
+        - PIP=pip
+        - CIBW_SKIP="cp27-* cp33-* cp34-*"
+        - CIBW_BEFORE_BUILD="pip install -r test-requirements.txt"
+    - os: osx
+      language: generic
+      env:
+        - PIP=pip2
+        - CIBWSKIP="cp27-* cp33-* cp34-*"
+        - CIBW_BEFORE_BUILD="pip install -r test-requirements.txt"
 
 script:
-  - ls -l
-  - docker run --rm -v `pwd`:/io $DOCKER_IMAGE $PRE_CMD /io/.travis/linux-manywheel.sh
+  - $PIP install -r test-requirements.txt
+  - $PIP install cibuildwheel==0.9.2
+  - cibuildwheel --output-dir wheelhouse
 
 notifications:
   email:
