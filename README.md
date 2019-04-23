@@ -14,8 +14,7 @@ Simple:
 ```
 git clone --recursive https://github.com/ethanhs/pynanosvg.git
 cd pynanosvg
-python3 -m pip install -r requirements.txt
-python3 setup.py install
+python3 -m pip install .
 ```
 
 or just
