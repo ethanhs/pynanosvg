@@ -18,7 +18,7 @@ matrix:
 
 script:
   - $PIP install -r test-requirements.txt
-  - $PIP install cibuildwheel==0.9.2
+  - $PIP install cibuildwheel==0.10
   - cibuildwheel --output-dir wheelhouse
 
 notifications:
