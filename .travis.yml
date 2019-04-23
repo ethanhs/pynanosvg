@@ -12,13 +12,14 @@ matrix:
     - os: osx
       language: generic
       env:
-        - PIP=pip2
+        - PIP=pip
         - CIBWSKIP="cp27-* cp33-* cp34-*"
         - CIBW_BEFORE_BUILD="pip install ."
 
 script:
   - $PIP install -r test-requirements.txt
   - $PIP install cibuildwheel==0.10
+  - $PIP install .
   - cibuildwheel --output-dir wheelhouse
 
 notifications:
