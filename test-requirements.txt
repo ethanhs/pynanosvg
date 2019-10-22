@@ -1,2 +1,2 @@
 pytest==3.5
-Pillow==6.0
+Pillow==6.2.0
