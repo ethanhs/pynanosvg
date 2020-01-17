@@ -30,6 +30,7 @@ jobs:
         architecture: ${{ matrix.arch }}
     - name: install requirements
       run: python -m pip install -r test-requirements.txt
+    - run: python -m pip install -U setuptools
     - run: python setup.py build_ext
       
       
