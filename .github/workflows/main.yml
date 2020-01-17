@@ -18,7 +18,7 @@ jobs:
     runs-on: windows-latest
     strategy:
         matrix:
-          python: ['3.5', '3.6', '3.7', '3.8']
+          python: ['3.5', '3.6', '3.7']
           arch: ['x86', 'x64']
     steps:
     - uses: actions/checkout@v1
