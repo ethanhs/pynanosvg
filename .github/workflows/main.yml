@@ -16,7 +16,7 @@ jobs:
   tests:
 
     runs-on: windows-latest
-      strategy:
+    strategy:
         matrix:
           python: ['3.5', '3.6', '3.7', '3.8']
           arch: ['x86', 'x64']
