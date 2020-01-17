@@ -22,6 +22,7 @@ jobs:
           arch: ['x86', 'x64']
     steps:
     - uses: actions/checkout@v1
+    - run: git submodule update --init
     - name: Setup Python
       uses: actions/setup-python@v1
       with:
